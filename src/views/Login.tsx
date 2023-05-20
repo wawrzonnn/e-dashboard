@@ -30,8 +30,30 @@ export const Login = () => {
          return errors;
       },
       onSubmit: (values) => {
-         console.log('values', values);
+         console.log('values:', values);
          window.location.href = '/dashboard';
+         fetch('https://training.nerdbord.io/api/v1/leads', {
+            method: 'POST',
+            headers: {
+               Authorization: 'secret_token',
+               'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+               email: values.email,
+               password: values.password,
+            }),
+         })
+            .then((response) => {
+               console.log('response.status', response.status);
+               console.log('response.statusText', response.statusText);
+               if (response.status >= 200 && response.status < 300) {
+               } else if (response.status >= 400 && response.status < 500) {
+                  console.log('dupa', response.statusText);
+               }
+            })
+            .catch((error) => {
+               console.log('error:', error);
+            });
       },
    });
 
@@ -73,10 +95,13 @@ export const Login = () => {
                   <Button
                      type={'submit'}
                      variant={'primary'}
-                     onClick={function (
-                        event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-                     ): void {
-                        throw new Error('Function not implemented.');
+                     onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+                        event.preventDefault();
+                        try {
+                           formik.handleSubmit();
+                        } catch (error) {
+                           console.error('An error occurred:', error);
+                        }
                      }}
                   >
                      Login
