@@ -31,6 +31,7 @@ export const Login = () => {
       },
       onSubmit: (values) => {
          console.log('values', values);
+         window.location.href = '/dashboard';
       },
    });
 
