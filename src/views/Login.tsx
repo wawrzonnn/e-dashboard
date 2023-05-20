@@ -95,13 +95,10 @@ export const Login = () => {
                   <Button
                      type={'submit'}
                      variant={'primary'}
-                     onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-                        event.preventDefault();
-                        try {
-                           formik.handleSubmit();
-                        } catch (error) {
-                           console.error('An error occurred:', error);
-                        }
+                     onClick={function (
+                        event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+                     ): void {
+                        throw new Error('Function not implemented.');
                      }}
                   >
                      Login
