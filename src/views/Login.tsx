@@ -6,13 +6,19 @@ import { BorderAside } from 'components/BorderAside';
 import styles from './Login.module.scss';
 import borderLeftImage from '../assets/borderLeft.png';
 import welcomeGraphicImage from '../assets/welcomeGraphic.png';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 interface FormValues {
    email: string;
    password: string;
 }
 
+const apiUrl: string = 'https://training.nerdbord.io/api/v1/leads';
+
 export const Login = () => {
+   const navigate = useNavigate();
+
    const formik = useFormik<FormValues>({
       initialValues: {
          email: '',
@@ -29,31 +35,32 @@ export const Login = () => {
 
          return errors;
       },
-      onSubmit: (values) => {
-         console.log('values:', values);
-         window.location.href = '/dashboard';
-         fetch('https://training.nerdbord.io/api/v1/leads', {
-            method: 'POST',
-            headers: {
-               Authorization: 'secret_token',
-               'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-               email: values.email,
-               password: values.password,
-            }),
-         })
-            .then((response) => {
-               console.log('response.status', response.status);
-               console.log('response.statusText', response.statusText);
-               if (response.status >= 200 && response.status < 300) {
-               } else if (response.status >= 400 && response.status < 500) {
-                  console.log('dupa', response.statusText);
-               }
-            })
-            .catch((error) => {
-               console.log('error:', error);
-            });
+      onSubmit: async (values) => {
+         try {
+            console.log('values:', values);
+            const response = await axios.post(
+               apiUrl,
+               {
+                  email: values.email,
+                  password: values.password,
+               },
+               {
+                  headers: {
+                     Authorization: 'secret_token',
+                     'Content-Type': 'application/json',
+                  },
+               },
+            );
+            console.log('response.status:', response.status);
+            console.log('response.statusText:', response.statusText);
+            if (response.status >= 200 && response.status < 300) {
+               navigate('/dashboard');
+            } else if (response.status >= 400 && response.status < 500) {
+               console.log('response.statusText:', response.statusText);
+            }
+         } catch (error) {
+            console.log('error:', error);
+         }
       },
    });
 
