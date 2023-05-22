@@ -1,0 +1,35 @@
+.wrapper {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   width: 1000px;
+   background: #e6e1e5;
+   margin: 0 -45px;
+   height: 53px;
+   p {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      color: #313033;
+   }
+   span {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      color: #605d62;
+      margin-left: 10px;
+   }
+   a {
+      // font-weight: 500;
+      // font-size: 14px;
+      // line-height: 20px;
+      // color: #b23386;
+   }
+}
+
+.tabs,
+.login {
+   margin: 0 65px;
+   display: flex;
+   gap: 15px;
+}

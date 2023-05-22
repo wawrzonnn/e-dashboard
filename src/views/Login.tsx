@@ -2,7 +2,7 @@ import React from 'react';
 import { useFormik } from 'formik';
 import { Container } from '../components/Container/Container';
 import { TextField, Button } from 'nerdux-ui-system';
-import { BorderAside } from 'components/BorderAside';
+import { BorderAside } from 'components/BorderAside/BorderAside';
 import styles from './Login.module.scss';
 import borderLeftImage from '../assets/borderLeft.png';
 import welcomeGraphicImage from '../assets/welcomeGraphic.png';
@@ -36,6 +36,7 @@ export const Login = () => {
          return errors;
       },
       onSubmit: async (values) => {
+         navigate('/dashboard');
          try {
             console.log('values:', values);
             const response = await axios.post(
@@ -54,7 +55,7 @@ export const Login = () => {
             console.log('response.status:', response.status);
             console.log('response.statusText:', response.statusText);
             if (response.status >= 200 && response.status < 300) {
-               navigate('/dashboard');
+               // navigate('/dashboard');
             } else if (response.status >= 400 && response.status < 500) {
                console.log('response.statusText:', response.statusText);
             }
@@ -65,7 +66,7 @@ export const Login = () => {
    });
 
    return (
-      <Container>
+      <div className={styles.wrapper}>
          <aside>
             <BorderAside src={borderLeftImage} alt={'Border left'} />
          </aside>
@@ -116,6 +117,6 @@ export const Login = () => {
          <aside>
             <BorderAside src={welcomeGraphicImage} alt={'Welcome graphic'} />
          </aside>
-      </Container>
+      </div>
    );
 };
