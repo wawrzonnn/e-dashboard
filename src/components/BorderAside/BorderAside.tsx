@@ -1,4 +1,5 @@
 import React, { PropsWithChildren } from 'react';
+import styles from './BorderAside.module.scss';
 
 interface BorderAsideProps {
    src: string;
@@ -6,5 +7,5 @@ interface BorderAsideProps {
 }
 
 export const BorderAside = ({ src, alt }: PropsWithChildren<BorderAsideProps>) => {
-   return <img src={src} alt={alt} />;
+   return <img className={styles.image} src={src} alt={alt} />;
 };

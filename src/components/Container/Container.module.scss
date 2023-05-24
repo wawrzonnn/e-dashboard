@@ -1,8 +1,7 @@
 .container {
-  display: flex;
   max-width: 1128px;
   margin: 0 auto;
-  padding: 0 24px;
+  
   @media only screen and (max-width: 768px) {
     padding: 0 8px;
   }
