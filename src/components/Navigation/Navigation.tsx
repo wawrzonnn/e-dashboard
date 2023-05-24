@@ -1,17 +1,16 @@
 import React from 'react';
 import styles from './Navigation.module.scss';
 import { Container } from 'components/Container/Container';
-import { Link, Tabs, Tab } from 'nerdux-ui-system';
+import { Link } from 'nerdux-ui-system';
+import { NavLink } from 'components/NavLink/NavLink';
 
 export const Navigation = () => {
    return (
       <Container>
          <div className={styles.navigation__wrapper}>
-            <div className={styles.navlink__wrapper}>
-               <Tabs>
-                  <Tab id={'1'}>Dashboard</Tab>
-                  <Tab id={'2'}>Leads</Tab>
-               </Tabs>
+            <div className={styles.navLink__wrapper}>
+               <NavLink to={'/dashboard'}>Dashboard</NavLink>
+               <NavLink to={'/leads'}>Leads</NavLink>
             </div>
             <div className={styles.login__wrapper}>
                <p>
