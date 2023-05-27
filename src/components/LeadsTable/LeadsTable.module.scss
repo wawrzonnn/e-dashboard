@@ -1,0 +1,35 @@
+.wrapper {
+   border-spacing: 0px;
+   outline: 1.5px solid #1c1b1f;
+   font-family: 'Inter';
+   font-style: normal;
+   font-weight: 500;
+   font-size: 16px;
+   border-spacing: 0;
+}
+.table {
+   padding: 0 20px;
+}
+.head {
+   background: #1c1b1f;
+   color: #ffffff;
+   height: 56px;
+}
+
+.row {
+   outline: 0.1px solid #1c1b1f;
+}
+
+.cell {
+   padding: 15px 20px;
+   font-size: 14px;
+   line-height: 20px;
+   width: 150px;
+}
+
+.textAlignLeft {
+   text-align: left;
+}
+.textAlignRight {
+   text-align: right;
+}
