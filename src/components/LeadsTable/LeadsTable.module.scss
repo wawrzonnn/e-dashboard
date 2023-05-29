@@ -16,6 +16,13 @@
    height: 56px;
 }
 
+.tableHeader {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+
+}
+
 .row {
    outline: 0.1px solid #1c1b1f;
 }
@@ -27,9 +34,22 @@
    width: 150px;
 }
 
-.textAlignLeft {
+.cellAlignLeft {
    text-align: left;
 }
-.textAlignRight {
+.cellAlignRight {
    text-align: right;
+}
+
+.headerArrowInactive svg path {
+fill: white;
+opacity: 0.38;
+}
+
+.tableHeaderRight {
+   justify-content: flex-end;
+}
+
+.active svg path {
+opacity: 1;
 }

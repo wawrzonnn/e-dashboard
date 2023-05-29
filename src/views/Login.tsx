@@ -100,15 +100,7 @@ export const Login = () => {
                />
 
                <div className={styles.submit__button}>
-                  <Button
-                     type={'submit'}
-                     variant={'primary'}
-                     onClick={function (
-                        event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-                     ): void {
-                        throw new Error('Function not implemented.');
-                     }}
-                  >
+                  <Button type={'submit'} variant={'primary'}>
                      Login
                   </Button>
                </div>
