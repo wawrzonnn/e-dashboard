@@ -114,8 +114,6 @@ export const leadsSlice = createSlice({
 });
 
 export const { setSortKey } = leadsSlice.actions;
-
 export const selectLeads = (state: { leads: LeadsState }) => state.leads.leads;
 export const selectSortKey = (state: { leads: LeadsState }) => state.leads.sortKey;
-
 export default leadsSlice.reducer;
