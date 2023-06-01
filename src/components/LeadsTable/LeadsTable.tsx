@@ -7,6 +7,14 @@ import { loadLeads } from '../../thunks/leadThunks';
 
 const cx = classNames.bind(styles);
 
+interface Leads {
+   _id: string;
+   name: string;
+   email: string;
+   consentsAccepted: boolean;
+   createdAt: string;
+}
+
 export const LeadsTable = () => {
    const leads = useSelector((state: any) => state.leads);
    const dispatch = useDispatch();
@@ -57,7 +65,7 @@ export const LeadsTable = () => {
                </tr>
             </thead>
             <tbody>
-               {leads.map((lead) => (
+               {leads.map((lead: Leads) => (
                   <tr key={lead._id} className={styles.row}>
                      <td className={cellAlignLeft}>{lead.name}</td>
                      <td className={cellAlignLeft}>{lead.email}</td>
