@@ -1,50 +1,25 @@
-import React, { PropsWithChildren, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from './LeadsTable.module.scss';
-import { fetchLeads, selectLeads, sortLeadsByColumn, selectSortKey } from './leadsSlice';
 import { TableArrow } from '../../assets/icons/TableArrow';
 import classNames from 'classnames/bind';
+import { loadLeads } from '../../thunks/leadThunks';
 
 const cx = classNames.bind(styles);
 
-interface LeadsTableProps {}
-
-export const LeadsTable = ({}: PropsWithChildren<LeadsTableProps>) => {
+export const LeadsTable = () => {
+   const leads = useSelector((state: any) => state.leads);
    const dispatch = useDispatch();
-   const leads = useSelector(selectLeads);
-   const sortKey = useSelector(selectSortKey);
-   const [selectedColumn, setSelectedColumn] = useState('');
 
    useEffect(() => {
-      dispatch(fetchLeads() as any);
+      dispatch(loadLeads() as any);
    }, [dispatch]);
-
-   const formatDateString = (dateString: string) => {
-      const date = new Date(dateString);
-      const day = date.getDate().toString().padStart(2, '0');
-      const month = (date.getMonth() + 1).toString().padStart(2, '0');
-      const year = date.getFullYear();
-      return `${day}/${month}/${year}`;
-   };
-
-   const handleHeaderClick = (key: 'name' | 'email' | 'consentsAccepted' | 'date') => {
-      dispatch(sortLeadsByColumn(key) as any);
-      setSelectedColumn(key);
-   };
-
-   const getHeaderClass = (columnKey: string) => {
-      return cx({
-         [styles.tableHeader]: true,
-         [styles.headerArrowInactive]: true,
-         [styles.tableHeaderRight]: columnKey === 'email' || columnKey === 'date',
-         [styles.active]: selectedColumn === columnKey,
-      });
-   };
 
    const cellAlignLeft = cx({
       [styles.cell]: true,
       [styles.cellAlignLeft]: true,
    });
+
    const cellAlignRight = cx({
       [styles.cell]: true,
       [styles.cellAlignRight]: true,
@@ -55,26 +30,26 @@ export const LeadsTable = ({}: PropsWithChildren<LeadsTableProps>) => {
          <table className={styles.table}>
             <thead className={styles.head}>
                <tr className={styles.row}>
-                  <th className={styles.cell} onClick={() => handleHeaderClick('name')}>
-                     <div className={getHeaderClass('name')}>
+                  <th className={styles.cell}>
+                     <div>
                         Name
                         <TableArrow />
                      </div>
                   </th>
-                  <th className={styles.cell} onClick={() => handleHeaderClick('email')}>
-                     <div className={getHeaderClass('email')}>
+                  <th className={styles.cell}>
+                     <div>
                         Email
                         <TableArrow />
                      </div>
                   </th>
-                  <th className={styles.cell} onClick={() => handleHeaderClick('consentsAccepted')}>
-                     <div className={getHeaderClass('consentsAccepted')}>
+                  <th className={styles.cell}>
+                     <div>
                         Agreed
                         <TableArrow />
                      </div>
                   </th>
-                  <th className={styles.cell} onClick={() => handleHeaderClick('date')}>
-                     <div className={getHeaderClass('date')}>
+                  <th className={styles.cell}>
+                     <div>
                         Date
                         <TableArrow />
                      </div>
@@ -87,7 +62,7 @@ export const LeadsTable = ({}: PropsWithChildren<LeadsTableProps>) => {
                      <td className={cellAlignLeft}>{lead.name}</td>
                      <td className={cellAlignLeft}>{lead.email}</td>
                      <td className={cellAlignRight}>{lead.consentsAccepted ? 'Yes' : 'No'}</td>
-                     <td className={cellAlignRight}>{formatDateString(lead.createdAt)}</td>
+                     <td className={cellAlignRight}>{lead.createdAt}</td>
                   </tr>
                ))}
             </tbody>
