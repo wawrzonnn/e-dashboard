@@ -2,7 +2,6 @@ import React, { PropsWithChildren } from 'react';
 import { Login } from './views/Login';
 import { Dashboard } from './views/Dashboard';
 import { Leads } from './views/Leads';
-import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import { DashboardLayout } from 'components/DashboardLayout/DashboardLayout';
 import { Container } from 'components/Container/Container';

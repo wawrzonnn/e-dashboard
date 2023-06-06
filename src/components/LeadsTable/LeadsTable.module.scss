@@ -1,55 +1,37 @@
-.wrapper {
-   border-spacing: 0px;
-   outline: 1.5px solid #1c1b1f;
+.wrapper table {
    font-family: 'Inter';
    font-style: normal;
    font-weight: 500;
    font-size: 16px;
-   border-spacing: 0;
-}
-.table {
+   width: 100%;
+   outline: none;
    padding: 0 20px;
 }
-.head {
-   background: #1c1b1f;
-   color: #ffffff;
-   height: 56px;
+
+.wrapper td {
+   display: block;
+   width: 100%;
+   padding: 17px 20px;
 }
 
 .tableHeader {
    display: flex;
    align-items: center;
    gap: 10px;
-
-}
-
-.row {
-   outline: 0.1px solid #1c1b1f;
-}
-
-.cell {
-   padding: 15px 20px;
-   font-size: 14px;
-   line-height: 20px;
-   width: 150px;
 }
 
 .cellAlignLeft {
-   text-align: left;
+   justify-content: flex-start;
 }
 .cellAlignRight {
-   text-align: right;
-}
-
-.headerArrowInactive svg path {
-fill: white;
-opacity: 0.38;
-}
-
-.tableHeaderRight {
    justify-content: flex-end;
 }
 
+.headerArrowInactive svg path {
+   fill: white;
+   opacity: 0.38;
+}
+
 .active svg path {
-opacity: 1;
+   opacity: 1;
 }

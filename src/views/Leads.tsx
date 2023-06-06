@@ -30,9 +30,7 @@ export const Leads = () => {
                </Button>
             </div>
          </div>
-         <div className={styles.leads__wrapper}>
-            <LeadsTable />
-         </div>
+         <LeadsTable />
       </>
    );
 };

@@ -1,19 +1,14 @@
+/* eslint-disable react/jsx-key */
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from './LeadsTable.module.scss';
 import { TableArrow } from '../../assets/icons/TableArrow';
 import classNames from 'classnames/bind';
 import { loadLeads } from '../../thunks/leadThunks';
-
+import { Leads } from '../../slices/leadSlice';
+import { useTable, useSortBy } from 'react-table';
+import { Table, TableHead, TableBody, TableCell, TableRow } from 'nerdux-ui-system';
 const cx = classNames.bind(styles);
-
-interface Leads {
-   _id: string;
-   name: string;
-   email: string;
-   consentsAccepted: boolean;
-   createdAt: string;
-}
 
 export const LeadsTable = () => {
    const leads = useSelector((state: any) => state.leads);
@@ -24,57 +19,63 @@ export const LeadsTable = () => {
    }, [dispatch]);
 
    const cellAlignLeft = cx({
-      [styles.cell]: true,
+      [styles.wrapper]: true,
       [styles.cellAlignLeft]: true,
+      [styles.tableHeader]: true,
+      [styles.headerArrowInactive]: true,
    });
 
    const cellAlignRight = cx({
-      [styles.cell]: true,
+      [styles.wrapper]: true,
       [styles.cellAlignRight]: true,
+      [styles.tableHeader]: true,
+      [styles.headerArrowInactive]: true,
    });
 
    return (
       <>
-         <table className={styles.table}>
-            <thead className={styles.head}>
-               <tr className={styles.row}>
-                  <th className={styles.cell}>
-                     <div>
-                        Name
-                        <TableArrow />
-                     </div>
-                  </th>
-                  <th className={styles.cell}>
-                     <div>
-                        Email
-                        <TableArrow />
-                     </div>
-                  </th>
-                  <th className={styles.cell}>
-                     <div>
-                        Agreed
-                        <TableArrow />
-                     </div>
-                  </th>
-                  <th className={styles.cell}>
-                     <div>
-                        Date
-                        <TableArrow />
-                     </div>
-                  </th>
-               </tr>
-            </thead>
-            <tbody>
-               {leads.map((lead: Leads) => (
-                  <tr key={lead._id} className={styles.row}>
-                     <td className={cellAlignLeft}>{lead.name}</td>
-                     <td className={cellAlignLeft}>{lead.email}</td>
-                     <td className={cellAlignRight}>{lead.consentsAccepted ? 'Yes' : 'No'}</td>
-                     <td className={cellAlignRight}>{lead.createdAt}</td>
-                  </tr>
-               ))}
-            </tbody>
-         </table>
+         <div className={styles.wrapper}>
+            <Table>
+               <TableHead>
+                  <TableRow>
+                     <TableCell align={'right'}>
+                        <span className={cellAlignLeft}>
+                           Name
+                           <TableArrow />
+                        </span>
+                     </TableCell>
+                     <TableCell align={'left'}>
+                        <span className={cellAlignLeft}>
+                           Email
+                           <TableArrow />
+                        </span>
+                     </TableCell>
+                     <TableCell align={'right'}>
+                        <span className={cellAlignRight}>
+                           Agreed
+                           <TableArrow />
+                        </span>
+                     </TableCell>
+                     <TableCell align={'right'}>
+                        <span className={cellAlignRight}>
+                           Date
+                           <TableArrow />
+                        </span>
+                     </TableCell>
+                  </TableRow>
+               </TableHead>
+               <TableBody>
+                  {leads.map((lead: Leads) => (
+                     <TableRow key={lead._id}>
+                        <TableCell align="left">{lead.name}</TableCell>
+                        <TableCell align="left">{lead.email}</TableCell>
+                        <TableCell align="right">{lead.consentsAccepted ? 'Yes' : 'No'}</TableCell>
+                        <TableCell align="right">{lead.createdAt}</TableCell>
+                     </TableRow>
+                  ))}
+               </TableBody>
+            </Table>
+         </div>
       </>
    );
 };

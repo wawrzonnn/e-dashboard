@@ -1,5 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+export interface Leads {
+   _id: string;
+   name: string;
+   email: string;
+   consentsAccepted: boolean;
+   createdAt: string;
+}
+
 const leadSlice = createSlice({
    name: 'leads',
    initialState: [],
