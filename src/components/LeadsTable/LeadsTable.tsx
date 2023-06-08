@@ -1,13 +1,15 @@
 /* eslint-disable react/jsx-key */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useTable, useSortBy } from 'react-table';
 import styles from './LeadsTable.module.scss';
-import { TableArrow } from '../../assets/icons/TableArrow';
 import classNames from 'classnames/bind';
 import { loadLeads } from '../../thunks/leadThunks';
-import { Leads } from '../../slices/leadSlice';
-import { useTable, useSortBy } from 'react-table';
-import { Table, TableHead, TableBody, TableCell, TableRow } from 'nerdux-ui-system';
+import { formatDateString, formatNameString } from 'untils/formatDataString';
+
+import { TableArrow } from '../../assets/icons/TableArrow';
+import { Table, TableHead, TableBody, TableRow } from 'nerdux-ui-system';
+
 const cx = classNames.bind(styles);
 
 export const LeadsTable = () => {
@@ -18,64 +20,93 @@ export const LeadsTable = () => {
       dispatch(loadLeads() as any);
    }, [dispatch]);
 
-   const cellAlignLeft = cx({
-      [styles.wrapper]: true,
-      [styles.cellAlignLeft]: true,
-      [styles.tableHeader]: true,
-      [styles.headerArrowInactive]: true,
-   });
+   const getTableClasses = (columnId: string) =>
+      cx({
+         [styles.wrapper]: true,
+         [styles.thead]: true,
+         [styles.thLeft]: columnId === 'name' || columnId === 'email',
+         [styles.thRight]: columnId === 'consentsAccepted' || columnId === 'createdAt',
+      });
+   const getDynamicHeaderClasses = (isSorted: boolean, isSortedDesc: boolean) =>
+      cx({
+         [styles.arrowDisplay]: true,
+         [styles.isSorted]: isSorted,
+         [styles.isSortedDesc]: isSortedDesc,
+         [styles.notSorted]: !isSorted && !isSortedDesc,
+      });
 
-   const cellAlignRight = cx({
-      [styles.wrapper]: true,
-      [styles.cellAlignRight]: true,
-      [styles.tableHeader]: true,
-      [styles.headerArrowInactive]: true,
-   });
+   const columns = useMemo(
+      () => [
+         {
+            Header: 'Name',
+            accessor: 'name',
+            Cell: ({ value }: any) => (
+               <span className={styles.tdLeft}>{formatNameString(value)}</span>
+            ),
+         },
+         {
+            Header: 'Email',
+            accessor: 'email',
+            Cell: ({ value }: any) => <span className={styles.tdLeft}>{value.toLowerCase()}</span>,
+         },
+         {
+            Header: 'Agreed',
+            accessor: 'consentsAccepted',
+            Cell: ({ value }: any) => (
+               <span className={styles.tdRight}>{value ? 'Yes' : 'No'}</span>
+            ),
+         },
+         {
+            Header: 'Date',
+            accessor: 'createdAt',
+            Cell: ({ value }: any) => (
+               <span className={styles.tdRight}>{formatDateString(value)}</span>
+            ),
+         },
+      ],
+      [],
+   );
+   const tableInstance = useTable({ columns, data: leads }, useSortBy);
+   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
 
    return (
-      <>
-         <div className={styles.wrapper}>
-            <Table>
-               <TableHead>
-                  <TableRow>
-                     <TableCell align={'right'}>
-                        <span className={cellAlignLeft}>
-                           Name
-                           <TableArrow />
-                        </span>
-                     </TableCell>
-                     <TableCell align={'left'}>
-                        <span className={cellAlignLeft}>
-                           Email
-                           <TableArrow />
-                        </span>
-                     </TableCell>
-                     <TableCell align={'right'}>
-                        <span className={cellAlignRight}>
-                           Agreed
-                           <TableArrow />
-                        </span>
-                     </TableCell>
-                     <TableCell align={'right'}>
-                        <span className={cellAlignRight}>
-                           Date
-                           <TableArrow />
-                        </span>
-                     </TableCell>
+      <div className={styles.wrapper}>
+         <Table {...getTableProps()}>
+            <TableHead>
+               {headerGroups.map((headerGroup) => (
+                  <TableRow {...headerGroup.getHeaderGroupProps()}>
+                     {headerGroup.headers.map((column) => (
+                        <th
+                           {...column.getHeaderProps(column.getSortByToggleProps())}
+                           className={getTableClasses(column.id)}
+                        >
+                           {column.render('Header')}
+                           <span
+                              className={getDynamicHeaderClasses(
+                                 column.isSorted,
+                                 column.isSortedDesc,
+                              )}
+                           >
+                              <TableArrow />
+                           </span>
+                        </th>
+                     ))}
                   </TableRow>
-               </TableHead>
-               <TableBody>
-                  {leads.map((lead: Leads) => (
-                     <TableRow key={lead._id}>
-                        <TableCell align="left">{lead.name}</TableCell>
-                        <TableCell align="left">{lead.email}</TableCell>
-                        <TableCell align="right">{lead.consentsAccepted ? 'Yes' : 'No'}</TableCell>
-                        <TableCell align="right">{lead.createdAt}</TableCell>
+               ))}
+            </TableHead>
+            <TableBody {...getTableBodyProps()}>
+               {rows.map((row) => {
+                  prepareRow(row);
+                  return (
+                     <TableRow {...row.getRowProps()}>
+                        {row.cells.map((cell, idx) => (
+                           <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                        ))}
                      </TableRow>
-                  ))}
-               </TableBody>
-            </Table>
-         </div>
-      </>
+                  );
+               })}
+            </TableBody>
+         </Table>
+      </div>
    );
 };
