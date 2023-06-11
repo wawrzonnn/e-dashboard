@@ -1,3 +1,28 @@
-.wrapper {
-
+.leadsHeader__wrapper {
+   display: flex;
+   justify-content: space-between;
+   padding: 30px 20px;
+   width: 100%;
+   h2 {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 28px;
+      line-height: 36px;
+      color: #000000;
+   }
+}
+.search__wrapper {
+   display: flex;
+   gap: 5px;
+   align-items: center;
+   button {
+      color: white;
+      background-color: #000000;
+      height: 54px;
+   }
+   input {
+      height: 51.5px;
+      width: 200px;
+   }
 }

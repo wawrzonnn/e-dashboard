@@ -1,0 +1,55 @@
+.wrapper table {
+   font-family: 'Inter';
+   font-weight: 500;
+   width: 100%;
+   outline: none;
+   padding: 0 20px;
+}
+
+.wrapper th, .wrapper td {
+   width: 100%;
+   padding: 17px 20px;
+}
+
+.thead  {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+}
+
+.thLeft  {
+   justify-content: flex-start;
+}
+.thRight  {
+   justify-content: flex-end;
+}
+
+.notSorted svg path {
+   fill: white;
+   opacity: 0.38;
+}
+
+.isSorted svg {
+   opacity: 1;
+}
+
+.isSortedDesc svg {
+   opacity: 1;
+   transform: rotate(180deg);
+}
+
+.arrowDisplay {
+   display: flex;
+}
+
+.tdLeft {
+   width: 100%;
+   display: block;
+   text-align: left;
+}
+
+.tdRight {
+   width: 100%;
+   display: block;
+   text-align: right;
+}

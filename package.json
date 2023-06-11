@@ -10,6 +10,8 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
+    "@tanstack/react-table": "^8.9.1",
     "axios": "^1.4.0",
     "classnames": "^2.3.2",
     "formik": "^2.2.9",
@@ -17,12 +19,16 @@
     "react": "^18.2.0",
     "react-auth-kit": "^2.12.2",
     "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
     "react-router-dom": "^6.11.2",
+    "react-table": "^7.8.0",
+    "redux": "^4.2.1",
     "sass": "^1.60.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
+    "@types/react-table": "^7.7.14",
     "@typescript-eslint/eslint-plugin": "^5.56.0",
     "@vitejs/plugin-react": "^3.1.0",
     "eslint": "^8.36.0",
