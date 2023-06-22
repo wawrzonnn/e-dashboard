@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-key */
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTable, useSortBy } from 'react-table';
 import styles from './LeadsTable.module.scss';
 import classNames from 'classnames/bind';
 import { loadLeads } from '../../thunks/leadThunks';
-import { formatDateString, formatNameString } from 'untils/formatDataString';
+import { formatDateString, formatNameString } from 'utills/formatDataString';
 
 import { TableArrow } from '../../assets/icons/TableArrow';
 import { Table, TableHead, TableBody, TableRow } from 'nerdux-ui-system';
@@ -17,7 +17,7 @@ export const LeadsTable = () => {
    const dispatch = useDispatch();
 
    useEffect(() => {
-      dispatch(loadLeads() as any);
+      dispatch(loadLeads());
    }, [dispatch]);
 
    const getTableClasses = (columnId: string) =>
