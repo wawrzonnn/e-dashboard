@@ -8,8 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from 'store/hooks';
 
 export const Navigation = () => {
-   const userEmail = localStorage.getItem('userEmail');
-
+   // const userEmail = localStorage.getItem('userEmail');
+   const userEmail = useAppSelector((state) => state.user.data?.email);
    const signOut = useSignOut();
    localStorage.removeItem('userEmail');
    const navigate = useNavigate();
@@ -18,7 +18,7 @@ export const Navigation = () => {
       signOut();
       navigate('/');
    };
-   const user = useAppSelector((state) => state.user.data);
+
    return (
       <Container>
          <div className={styles.navigation__wrapper}>
@@ -28,8 +28,8 @@ export const Navigation = () => {
             </div>
             <div className={styles.login__wrapper}>
                <p>
-                  {/* Logged in as: <span>{user ? user.email : 'unknown'}</span>  */}
-                  Logged in as: <span>{userEmail ? userEmail : 'dupa'}</span>
+                  Logged in as: <span>{userEmail ? userEmail : 'unknown'}</span>
+                  {/* Logged in as: <span>{userEmail ? userEmail : 'dupa'}</span> */}
                </p>
                <button onClick={handleLogout}>
                   <Link onClick={handleLogout} to={''} target="_self">

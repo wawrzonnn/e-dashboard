@@ -45,7 +45,6 @@ export const Login = () => {
                   expiresIn: 3600,
                   tokenType: 'Bearer',
                });
-               localStorage.setItem('userEmail', userPayload.email);
                navigate('/dashboard');
             }
          } catch (error) {
