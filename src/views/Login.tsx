@@ -8,7 +8,7 @@ import welcomeGraphicImage from '../assets/welcomeGraphic.png';
 import { useNavigate } from 'react-router-dom';
 import { useSignIn } from 'react-auth-kit';
 import { useAppDispatch } from '../store/hooks';
-import { fetchUser } from '../thunks/userThunk';
+import { loginUser } from '../thunks/userThunk';
 
 interface FormValues {
    email: string;
@@ -37,7 +37,7 @@ export const Login = () => {
       },
       onSubmit: async (values) => {
          try {
-            const user = await dispatch(fetchUser(values));
+            const user = await dispatch(loginUser(values));
             if (user.payload) {
                signIn({
                   token: user.payload,

@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const fetchUser = createAsyncThunk(
+export const loginUser = createAsyncThunk(
    'user/fetchUser',
    async (userData: { email: string; password: string }) => {
       const response = await axios.post(
@@ -20,4 +20,4 @@ export const fetchUser = createAsyncThunk(
    },
 );
 
-export default fetchUser;
+export default loginUser;

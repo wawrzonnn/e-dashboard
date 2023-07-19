@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchUser } from '../thunks/userThunk';
+import { loginUser } from '../thunks/userThunk';
 
 interface UserState {
    status: 'idle' | 'loading' | 'succeeded' | 'failed';
@@ -17,14 +17,14 @@ const userSlice = createSlice({
    reducers: {},
    extraReducers: (builder) => {
       builder
-         .addCase(fetchUser.pending, (state) => {
+         .addCase(loginUser.pending, (state) => {
             state.status = 'loading';
          })
-         .addCase(fetchUser.fulfilled, (state, action) => {
+         .addCase(loginUser.fulfilled, (state, action) => {
             state.status = 'succeeded';
             state.data = action.payload.token;
          })
-         .addCase(fetchUser.rejected, (state, action) => {
+         .addCase(loginUser.rejected, (state, action) => {
             state.status = 'failed';
             state.error = action.error.message;
          });
