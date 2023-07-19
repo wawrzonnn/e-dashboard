@@ -8,16 +8,18 @@ import borderLeftImage from '../assets/borderLeft.png';
 import welcomeGraphicImage from '../assets/welcomeGraphic.png';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useSignIn } from 'react-auth-kit';
 
 interface FormValues {
    email: string;
    password: string;
 }
 
-const apiUrl: string = 'https://training.nerdbord.io/api/v1/leads';
+const apiUrl: string = 'https://training.nerdbord.io/api/v1/auth/login';
 
 export const Login = () => {
    const navigate = useNavigate();
+   const signIn = useSignIn();
 
    const formik = useFormik<FormValues>({
       initialValues: {
@@ -36,7 +38,6 @@ export const Login = () => {
          return errors;
       },
       onSubmit: async (values) => {
-         navigate('/dashboard');
          try {
             console.log('values:', values);
             const response = await axios.post(
@@ -47,7 +48,6 @@ export const Login = () => {
                },
                {
                   headers: {
-                     Authorization: 'secret_token',
                      'Content-Type': 'application/json',
                   },
                },
@@ -55,7 +55,12 @@ export const Login = () => {
             console.log('response.status:', response.status);
             console.log('response.statusText:', response.statusText);
             if (response.status >= 200 && response.status < 300) {
-               // navigate('/dashboard');
+               signIn({
+                  token: response.data.token,
+                  expiresIn: 3600,
+                  tokenType: 'Bearer',
+               });
+               navigate('/dashboard');
             } else if (response.status >= 400 && response.status < 500) {
                console.log('response.statusText:', response.statusText);
             }
@@ -100,7 +105,7 @@ export const Login = () => {
                />
 
                <div className={styles.submit__button}>
-                  <Button type={'submit'} variant={'primary'}>
+                  <Button type={'submit'} variant={'primary'} onClick={() => console.log('error')}>
                      Login
                   </Button>
                </div>

@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import leadsReducer from '../src/slices/leadSlice';
+import { AuthProvider } from 'react-auth-kit';
 
 const store = configureStore({
    reducer: {
@@ -15,9 +16,11 @@ const store = configureStore({
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
    <React.StrictMode>
       <Provider store={store}>
-         <BrowserRouter>
-            <App />
-         </BrowserRouter>
+         <AuthProvider authType={'cookie'} authName={'_auth'}>
+            <BrowserRouter>
+               <App />
+            </BrowserRouter>
+         </AuthProvider>
       </Provider>
    </React.StrictMode>,
 );
