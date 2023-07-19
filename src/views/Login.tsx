@@ -39,8 +39,9 @@ export const Login = () => {
          try {
             const user = await dispatch(loginUser(values));
             if (user.payload) {
+               const userPayload = user.payload as { token: string; email: string };
                signIn({
-                  token: user.payload,
+                  token: userPayload.token,
                   expiresIn: 3600,
                   tokenType: 'Bearer',
                });
