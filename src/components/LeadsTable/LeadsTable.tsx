@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-key */
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTable, useSortBy } from 'react-table';
 import styles from './LeadsTable.module.scss';
@@ -17,7 +17,7 @@ export const LeadsTable = () => {
    const dispatch = useDispatch();
 
    useEffect(() => {
-      dispatch(loadLeads() as any);
+      dispatch(loadLeads());
    }, [dispatch]);
 
    const getTableClasses = (columnId: string) =>

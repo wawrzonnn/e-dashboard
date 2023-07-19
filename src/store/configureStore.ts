@@ -1,8 +1,8 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import leadReducer from '../slices/leadSlice';
 import userReducer from '../slices/userSlice';
 
-export const store = configureStore({
+const store = configureStore({
    reducer: {
       leads: leadReducer,
       user: userReducer,
@@ -11,3 +11,11 @@ export const store = configureStore({
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+export type AppThunk<ReturnType = void> = ThunkAction<
+   ReturnType,
+   RootState,
+   unknown,
+   Action<string>
+>;
+
+export default store;
