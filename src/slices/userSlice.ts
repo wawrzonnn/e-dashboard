@@ -7,6 +7,7 @@ interface UserState {
       token: string;
       email: string;
    };
+   isTokenValid?: boolean;
    error?: string;
 }
 
@@ -29,6 +30,7 @@ const userSlice = createSlice({
                token: action.payload.token,
                email: action.payload.email,
             };
+            state.isTokenValid = action.payload.isTokenValid;
          })
          .addCase(loginUser.rejected, (state, action) => {
             state.status = 'failed';

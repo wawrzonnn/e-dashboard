@@ -1,10 +1,11 @@
-import React, { PropsWithChildren } from 'react';
+import React from 'react';
 import { Login } from './views/Login';
 import { Dashboard } from './views/Dashboard';
 import { Leads } from './views/Leads';
 import { Routes, Route } from 'react-router-dom';
 import { DashboardLayout } from 'components/DashboardLayout/DashboardLayout';
 import { Container } from 'components/Container/Container';
+import { AuthenticatedRoute } from 'components/AuthenticatedRoute/AuthenticatedRoute';
 
 function App() {
    return (
@@ -14,17 +15,21 @@ function App() {
             <Route
                path="/dashboard"
                element={
-                  <DashboardLayout>
-                     <Dashboard />
-                  </DashboardLayout>
+                  <AuthenticatedRoute>
+                     <DashboardLayout>
+                        <Dashboard />
+                     </DashboardLayout>
+                  </AuthenticatedRoute>
                }
             />
             <Route
                path="/leads"
                element={
-                  <DashboardLayout>
-                     <Leads />
-                  </DashboardLayout>
+                  <AuthenticatedRoute>
+                     <DashboardLayout>
+                        <Leads />
+                     </DashboardLayout>
+                  </AuthenticatedRoute>
                }
             />
          </Routes>
