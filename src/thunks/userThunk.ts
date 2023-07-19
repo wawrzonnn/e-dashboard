@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
+import { checkToken } from '../utills/checkToken';
 
 interface DecodedToken {
    email: string;
@@ -11,7 +12,7 @@ const decodeToken = (token: string): DecodedToken => {
 };
 export const loginUser = createAsyncThunk(
    'user/fetchUser',
-   async (userData: { email: string; password: string }) => {
+   async (userData: { email: string; password: string }, { dispatch }) => {
       const response = await axios.post(
          'https://training.nerdbord.io/api/v1/auth/login',
          {
@@ -25,7 +26,8 @@ export const loginUser = createAsyncThunk(
          },
       );
       const decoded = decodeToken(response.data.token);
-      return { token: response.data.token, email: decoded.email };
+      const isTokenValid = await checkToken(response.data.token);
+      return { token: response.data.token, email: decoded.email, isTokenValid };
    },
 );
 
