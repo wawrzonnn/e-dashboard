@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useTable, useSortBy } from 'react-table';
 import styles from './LeadsTable.module.scss';
 import classNames from 'classnames/bind';
-import { loadLeads } from '../../thunks/leadThunks';
-import { formatDateString, formatNameString } from 'utills/formatDataString';
+import { loadLeads } from '../../thunks/leadThunk';
+import { formatDateString, formatNameString } from 'untils/formatDataString';
 
 import { TableArrow } from '../../assets/icons/TableArrow';
 import { Table, TableHead, TableBody, TableRow } from 'nerdux-ui-system';

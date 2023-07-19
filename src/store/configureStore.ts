@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import leadReducer from '../slices/leadSlice';
+import userReducer from '../slices/userSlice';
 
 const store = configureStore({
    reducer: {
       leads: leadReducer,
+      user: userReducer,
    },
 });
 

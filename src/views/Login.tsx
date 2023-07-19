@@ -1,23 +1,24 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import { Container } from '../components/Container/Container';
 import { TextField, Button } from 'nerdux-ui-system';
 import { BorderAside } from 'components/BorderAside/BorderAside';
 import styles from './Login.module.scss';
 import borderLeftImage from '../assets/borderLeft.png';
 import welcomeGraphicImage from '../assets/welcomeGraphic.png';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useSignIn } from 'react-auth-kit';
+import { useAppDispatch } from '../store/hooks';
+import { loginUser } from '../thunks/userThunk';
 
 interface FormValues {
    email: string;
    password: string;
 }
 
-const apiUrl: string = 'https://training.nerdbord.io/api/v1/leads';
-
 export const Login = () => {
+   const dispatch = useAppDispatch();
    const navigate = useNavigate();
+   const signIn = useSignIn();
 
    const formik = useFormik<FormValues>({
       initialValues: {
@@ -32,32 +33,18 @@ export const Login = () => {
          } else if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(values.email.trim())) {
             errors.email = 'Invalid email format';
          }
-
          return errors;
       },
       onSubmit: async (values) => {
-         navigate('/dashboard');
          try {
-            console.log('values:', values);
-            const response = await axios.post(
-               apiUrl,
-               {
-                  email: values.email,
-                  password: values.password,
-               },
-               {
-                  headers: {
-                     Authorization: 'secret_token',
-                     'Content-Type': 'application/json',
-                  },
-               },
-            );
-            console.log('response.status:', response.status);
-            console.log('response.statusText:', response.statusText);
-            if (response.status >= 200 && response.status < 300) {
-               // navigate('/dashboard');
-            } else if (response.status >= 400 && response.status < 500) {
-               console.log('response.statusText:', response.statusText);
+            const user = await dispatch(loginUser(values));
+            if (user.payload) {
+               signIn({
+                  token: user.payload,
+                  expiresIn: 3600,
+                  tokenType: 'Bearer',
+               });
+               navigate('/dashboard');
             }
          } catch (error) {
             console.log('error:', error);
@@ -98,9 +85,8 @@ export const Login = () => {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                />
-
                <div className={styles.submit__button}>
-                  <Button type={'submit'} variant={'primary'}>
+                  <Button type={'submit'} variant={'primary'} onClick={() => console.log('error')}>
                      Login
                   </Button>
                </div>
