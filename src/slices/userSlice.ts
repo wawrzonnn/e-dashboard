@@ -3,7 +3,10 @@ import { loginUser } from '../thunks/userThunk';
 
 interface UserState {
    status: 'idle' | 'loading' | 'succeeded' | 'failed';
-   data?: string;
+   data?: {
+      token: string;
+      email: string;
+   };
    error?: string;
 }
 
@@ -22,7 +25,10 @@ const userSlice = createSlice({
          })
          .addCase(loginUser.fulfilled, (state, action) => {
             state.status = 'succeeded';
-            state.data = action.payload.token;
+            state.data = {
+               token: action.payload.token,
+               email: action.payload.email,
+            };
          })
          .addCase(loginUser.rejected, (state, action) => {
             state.status = 'failed';
