@@ -16,8 +16,12 @@ export const loadLeads =
    (token: string): AppThunk =>
    async (dispatch) => {
       try {
-         const leads = await dispatch(fetchLeads(token));
-         dispatch(setLeads(leads.payload));
+         const response = await axios.get('https://training.nerdbord.io/api/v1/leads', {
+            headers: {
+               Authorization: `Bearer ${token}`,
+            },
+         });
+         dispatch(setLeads(response.data));
       } catch (error) {
          console.error('Error loading leads:', error);
       }

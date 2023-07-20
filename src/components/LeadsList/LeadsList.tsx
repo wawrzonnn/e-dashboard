@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import styles from './LeadsList.module.scss';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { loadLeads } from '../../thunks/leadThunk';
-import { LeadDto } from '../../data/dto/Lead.dto';
 import { filterLeadsFromLast24Hours, formatDate } from 'utils/formatLeadsListData';
 import classNames from 'classnames';
 const cx = classNames.bind(styles);
@@ -10,9 +9,7 @@ const cx = classNames.bind(styles);
 export const LeadsList = () => {
    const dispatch = useAppDispatch();
    const user = useAppSelector((state) => state.user.data);
-   const leads = filterLeadsFromLast24Hours(
-      useAppSelector((state: { leads: LeadDto[] }) => state.leads),
-   );
+   const leads = filterLeadsFromLast24Hours(useAppSelector((state) => state.leads.leads));
 
    const [numDisplayed, setNumDisplayed] = useState(5);
    const [isScrollVisible, setIsScrollVisible] = useState(false);
