@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-key */
-import React, { ReactPropTypes, useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useTable, useSortBy } from 'react-table';
 import styles from './LeadsTable.module.scss';
 import classNames from 'classnames/bind';
 import { loadLeads } from '../../thunks/leadThunk';
-import { formatDateString, formatNameString } from '../../utills/formatDataString';
+import { formatDateString, formatNameString } from '../../utils/formatLeadsTableData';
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import { TableArrow } from '../../assets/icons/TableArrow';
 import { Table, TableHead, TableBody, TableRow } from 'nerdux-ui-system';
@@ -13,11 +13,14 @@ const cx = classNames.bind(styles);
 
 export const LeadsTable = () => {
    const leads = useAppSelector((state) => state.leads);
+   const user = useAppSelector((state) => state.user.data);
    const dispatch = useAppDispatch();
 
    useEffect(() => {
-      dispatch(loadLeads());
-   }, [dispatch]);
+      if (user?.token) {
+         dispatch(loadLeads(user.token));
+      }
+   }, [dispatch, user]);
 
    const getTableClasses = (columnId: string) =>
       cx({

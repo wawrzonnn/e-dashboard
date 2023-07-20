@@ -1,18 +1,24 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 import { setLeads } from '../slices/leadSlice';
-import { AppThunk, AppDispatch } from '../store/configureStore';
+import { AppThunk } from '../store/configureStore';
 
-export const fetchLeads = createAsyncThunk('leads/fetch', async () => {
-   const response = await fetch('https://training.nerdbord.io/api/v1/leads');
-   const data = await response.json();
-   return data;
+export const fetchLeads = createAsyncThunk('leads/fetch', async (token: string) => {
+   const response = await axios.get('https://training.nerdbord.io/api/v1/leads', {
+      headers: {
+         Authorization: `Bearer ${token}`,
+      },
+   });
+   return response.data;
 });
 
-export const loadLeads = (): AppThunk => async (dispatch) => {
-   try {
-      const leads = await dispatch(fetchLeads());
-      dispatch(setLeads(leads.payload));
-   } catch (error) {
-      console.error('Error loading leads:', error);
-   }
-};
+export const loadLeads =
+   (token: string): AppThunk =>
+   async (dispatch) => {
+      try {
+         const leads = await dispatch(fetchLeads(token));
+         dispatch(setLeads(leads.payload));
+      } catch (error) {
+         console.error('Error loading leads:', error);
+      }
+   };
