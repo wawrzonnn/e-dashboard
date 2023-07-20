@@ -1,5 +1,4 @@
 import React, { PropsWithChildren } from 'react';
-import { Container } from 'components/Container/Container';
 import BorderLeft from '../../assets/borderLeft.png';
 import BorderRight from '../../assets/borderRight.png';
 import { Navigation } from 'components/Navigation/Navigation';

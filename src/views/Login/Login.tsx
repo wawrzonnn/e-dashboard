@@ -1,14 +1,14 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import { TextField, Button } from 'nerdux-ui-system';
-import { BorderAside } from 'components/BorderAside/BorderAside';
+import { BorderAside } from '../../components/BorderAside/BorderAside';
 import styles from './Login.module.scss';
-import borderLeftImage from '../assets/borderLeft.png';
-import welcomeGraphicImage from '../assets/welcomeGraphic.png';
+import borderLeftImage from '../../assets/borderLeft.png';
+import welcomeGraphicImage from '../../assets/welcomeGraphic.png';
 import { useNavigate } from 'react-router-dom';
 import { useSignIn } from 'react-auth-kit';
-import { useAppDispatch } from '../store/hooks';
-import { loginUser } from '../thunks/userThunk';
+import { useAppDispatch } from '../../store/hooks';
+import { loginUser } from '../../thunks/userThunk';
 
 interface FormValues {
    email: string;

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Login } from './views/Login';
-import { Dashboard } from './views/Dashboard';
-import { Leads } from './views/Leads';
+import { Login } from './views/Login/Login';
+import { Dashboard } from './views/Dashboard/Dashboard';
+import { Leads } from './views/Leads/Leads';
 import { Routes, Route } from 'react-router-dom';
 import { DashboardLayout } from 'components/DashboardLayout/DashboardLayout';
 import { Container } from 'components/Container/Container';

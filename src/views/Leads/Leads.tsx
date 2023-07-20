@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from '../components/Container/Container';
+import { Container } from '../../components/Container/Container';
 import styles from './Leads.module.scss';
 import { TextField, Button } from 'nerdux-ui-system';
 import { LeadsTable } from 'components/LeadsTable/LeadsTable';
