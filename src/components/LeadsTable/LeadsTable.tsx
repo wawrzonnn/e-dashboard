@@ -1,17 +1,20 @@
 /* eslint-disable react/jsx-key */
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useTable, useSortBy } from 'react-table';
-import styles from './LeadsTable.module.scss';
-import classNames from 'classnames/bind';
-import { loadLeads } from '../../thunks/leadThunk';
-import { setFilteredLeads } from '../../slices/leadSlice';
-import { formatDateString, formatNameString } from '../../utils/formatLeadsTableData';
-import { useAppSelector, useAppDispatch } from '../../store/hooks';
-import { TableArrow } from '../../assets/icons/TableArrow';
-import { Table, TableHead, TableBody, TableRow } from 'nerdux-ui-system';
-import { LeadDto } from 'data/dto/Lead.dto';
-import { filterLeads } from 'utils/filteredLeads';
 import Highlighter from 'react-highlight-words';
+import classNames from 'classnames/bind';
+
+import { Table, TableHead, TableBody, TableRow } from 'nerdux-ui-system';
+
+import { LeadDto } from 'data/dto/Lead.dto';
+import { useAppSelector } from '../../store/hooks';
+import { formatDateString, formatNameString } from '../../utils/formatLeadsTableData';
+import { useTableStyles } from './useTableStyles';
+import { useTableEffects } from './useTableEffects';
+import { TableArrow } from '../../assets/icons/TableArrow';
+
+import styles from './LeadsTable.module.scss';
+
 const cx = classNames.bind(styles);
 
 interface LeadsTableProps {
@@ -24,36 +27,9 @@ interface Column {
 }
 
 export const LeadsTable: React.FC<LeadsTableProps> = ({ searchValue }) => {
-   const leads: LeadDto[] = useAppSelector((state) => state.leads.leads);
-   const user = useAppSelector((state) => state.user.data);
-   const dispatch = useAppDispatch();
+   useTableEffects(searchValue);
+   const { getTableClasses, getDynamicHeaderClasses } = useTableStyles();
    const filteredLeads = useAppSelector((state) => state.leads.filteredLeads);
-
-   useEffect(() => {
-      if (user?.token) {
-         dispatch(loadLeads(user.token));
-      }
-   }, [dispatch, user]);
-
-   useEffect(() => {
-      const filtered = filterLeads(leads, searchValue);
-      dispatch(setFilteredLeads(filtered));
-   }, [leads, searchValue, dispatch]);
-
-   const getTableClasses = (columnId: string) =>
-      cx({
-         [styles.wrapper]: true,
-         [styles.thead]: true,
-         [styles.thLeft]: columnId === 'name' || columnId === 'email',
-         [styles.thRight]: columnId === 'consentsAccepted' || columnId === 'createdAt',
-      });
-   const getDynamicHeaderClasses = (isSorted: boolean, isSortedDesc: boolean) =>
-      cx({
-         [styles.arrowDisplay]: true,
-         [styles.isSorted]: isSorted,
-         [styles.isSortedDesc]: isSortedDesc,
-         [styles.notSorted]: !isSorted && !isSortedDesc,
-      });
 
    const columns = useMemo<Column[]>(
       () => [
