@@ -1,6 +1,15 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import jwt_decode from 'jwt-decode';
+import { checkToken } from '../utills/checkToken';
 
+interface DecodedToken {
+   email: string;
+}
+
+const decodeToken = (token: string): DecodedToken => {
+   return jwt_decode(token);
+};
 export const loginUser = createAsyncThunk(
    'user/fetchUser',
    async (userData: { email: string; password: string }, { dispatch }) => {
@@ -16,7 +25,9 @@ export const loginUser = createAsyncThunk(
             },
          },
       );
-      return response;
+      const decoded = decodeToken(response.data.token);
+      const isTokenValid = await checkToken(response.data.token);
+      return { token: response.data.token, email: decoded.email, isTokenValid };
    },
 );
 
