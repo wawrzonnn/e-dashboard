@@ -44,6 +44,11 @@ export const LeadsTable: React.FC<LeadsTableProps> = ({ searchValue }) => {
                   textToHighlight={formatNameString(value)}
                />
             ),
+            sortType: (a: { original: { name: string } }, b: { original: { name: string } }) => {
+               const aName = formatNameString(a.original.name);
+               const bName = formatNameString(b.original.name);
+               return aName.localeCompare(bName);
+            },
          },
          {
             Header: 'Email',
