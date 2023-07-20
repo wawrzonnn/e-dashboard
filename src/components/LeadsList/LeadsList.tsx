@@ -21,8 +21,8 @@ export const LeadsList = () => {
    }, [dispatch]);
 
    const loadMore = () => {
-      setIsScrollVisible(true);
-      setNumDisplayed((prevState) => prevState + 5);
+      setIsScrollVisible(leads.length > numDisplayed);
+      setNumDisplayed((prevState) => prevState + Math.min(5, leads.length - prevState));
    };
 
    const getListClasses = cx({

@@ -13,11 +13,14 @@ const cx = classNames.bind(styles);
 
 export const LeadsTable = () => {
    const leads = useAppSelector((state) => state.leads);
+   const user = useAppSelector((state) => state.user.data);
    const dispatch = useAppDispatch();
 
    useEffect(() => {
-      dispatch(loadLeads());
-   }, [dispatch]);
+      if (user?.token) {
+         dispatch(loadLeads(user.token));
+      }
+   }, [dispatch, user]);
 
    const getTableClasses = (columnId: string) =>
       cx({
