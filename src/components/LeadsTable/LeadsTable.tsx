@@ -1,20 +1,19 @@
 /* eslint-disable react/jsx-key */
-import React, { useEffect, useMemo } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { ReactPropTypes, useEffect, useMemo } from 'react';
 import { useTable, useSortBy } from 'react-table';
 import styles from './LeadsTable.module.scss';
 import classNames from 'classnames/bind';
 import { loadLeads } from '../../thunks/leadThunk';
 import { formatDateString, formatNameString } from '../../utills/formatDataString';
-
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import { TableArrow } from '../../assets/icons/TableArrow';
 import { Table, TableHead, TableBody, TableRow } from 'nerdux-ui-system';
 
 const cx = classNames.bind(styles);
 
 export const LeadsTable = () => {
-   const leads = useSelector((state: any) => state.leads);
-   const dispatch = useDispatch();
+   const leads = useAppSelector((state) => state.leads);
+   const dispatch = useAppDispatch();
 
    useEffect(() => {
       dispatch(loadLeads());
@@ -40,34 +39,38 @@ export const LeadsTable = () => {
          {
             Header: 'Name',
             accessor: 'name',
-            Cell: ({ value }: any) => (
+            Cell: ({ value }: { value: string }) => (
                <span className={styles.tdLeft}>{formatNameString(value)}</span>
             ),
          },
          {
             Header: 'Email',
             accessor: 'email',
-            Cell: ({ value }: any) => <span className={styles.tdLeft}>{value.toLowerCase()}</span>,
+            Cell: ({ value }: { value: string }) => (
+               <span className={styles.tdLeft}>{value.toLowerCase()}</span>
+            ),
          },
          {
             Header: 'Agreed',
             accessor: 'consentsAccepted',
-            Cell: ({ value }: any) => (
+            Cell: ({ value }: { value: boolean }) => (
                <span className={styles.tdRight}>{value ? 'Yes' : 'No'}</span>
             ),
          },
          {
             Header: 'Date',
             accessor: 'createdAt',
-            Cell: ({ value }: any) => (
+            Cell: ({ value }: { value: string }) => (
                <span className={styles.tdRight}>{formatDateString(value)}</span>
             ),
          },
       ],
       [],
    );
-   const tableInstance = useTable({ columns, data: leads }, useSortBy);
-   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
+   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable(
+      { columns, data: leads },
+      useSortBy,
+   );
 
    return (
       <div className={styles.wrapper}>
@@ -84,7 +87,7 @@ export const LeadsTable = () => {
                            <span
                               className={getDynamicHeaderClasses(
                                  column.isSorted,
-                                 column.isSortedDesc,
+                                 column.isSortedDesc || false,
                               )}
                            >
                               <TableArrow />

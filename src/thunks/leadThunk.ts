@@ -8,7 +8,7 @@ export const fetchLeads = createAsyncThunk('leads/fetch', async () => {
    return data;
 });
 
-export const loadLeads: AppThunk = () => async (dispatch: AppDispatch) => {
+export const loadLeads = (): AppThunk => async (dispatch) => {
    try {
       const leads = await dispatch(fetchLeads());
       dispatch(setLeads(leads.payload));
