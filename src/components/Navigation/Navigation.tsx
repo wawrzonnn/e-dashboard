@@ -5,11 +5,8 @@ import { Link } from 'nerdux-ui-system';
 import { NavLink } from 'components/NavLink/NavLink';
 import { useSignOut } from 'react-auth-kit';
 import { useNavigate } from 'react-router-dom';
-import { useAppSelector } from 'store/hooks';
 
 export const Navigation = () => {
-   // const userEmail = localStorage.getItem('userEmail');
-   const userEmail = useAppSelector((state) => state.user.data?.email);
    const signOut = useSignOut();
    localStorage.removeItem('userEmail');
    const navigate = useNavigate();
@@ -28,8 +25,7 @@ export const Navigation = () => {
             </div>
             <div className={styles.login__wrapper}>
                <p>
-                  Logged in as: <span>{userEmail ? userEmail : 'unknown'}</span>
-                  {/* Logged in as: <span>{userEmail ? userEmail : 'dupa'}</span> */}
+                  Logged in as: <span>email</span>
                </p>
                <button onClick={handleLogout}>
                   <Link onClick={handleLogout} to={''} target="_self">
