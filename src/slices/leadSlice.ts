@@ -1,14 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
-
+import { LeadDto } from 'data/dto/Lead.dto';
 const leadSlice = createSlice({
    name: 'leads',
-   initialState: [],
+   initialState: {
+      leads: [] as LeadDto[],
+      filteredLeads: [] as LeadDto[],
+   },
    reducers: {
       setLeads: (state, action) => {
-         return action.payload;
+         state.leads = action.payload;
+      },
+      setFilteredLeads: (state, action) => {
+         state.filteredLeads = action.payload;
       },
    },
 });
 
-export const { setLeads } = leadSlice.actions;
+export const { setLeads, setFilteredLeads } = leadSlice.actions;
 export default leadSlice.reducer;

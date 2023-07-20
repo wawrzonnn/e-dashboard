@@ -4,23 +4,41 @@ import { useTable, useSortBy } from 'react-table';
 import styles from './LeadsTable.module.scss';
 import classNames from 'classnames/bind';
 import { loadLeads } from '../../thunks/leadThunk';
+import { setFilteredLeads } from '../../slices/leadSlice';
 import { formatDateString, formatNameString } from '../../utils/formatLeadsTableData';
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import { TableArrow } from '../../assets/icons/TableArrow';
 import { Table, TableHead, TableBody, TableRow } from 'nerdux-ui-system';
-
+import { LeadDto } from 'data/dto/Lead.dto';
+import { filterLeads } from 'utils/filteredLeads';
+import Highlighter from 'react-highlight-words';
 const cx = classNames.bind(styles);
 
-export const LeadsTable = () => {
-   const leads = useAppSelector((state) => state.leads);
+interface LeadsTableProps {
+   searchValue: string;
+}
+
+interface Column {
+   Header: string;
+   accessor: keyof LeadDto;
+}
+
+export const LeadsTable: React.FC<LeadsTableProps> = ({ searchValue }) => {
+   const leads: LeadDto[] = useAppSelector((state) => state.leads.leads);
    const user = useAppSelector((state) => state.user.data);
    const dispatch = useAppDispatch();
+   const filteredLeads = useAppSelector((state) => state.leads.filteredLeads);
 
    useEffect(() => {
       if (user?.token) {
          dispatch(loadLeads(user.token));
       }
    }, [dispatch, user]);
+
+   useEffect(() => {
+      const filtered = filterLeads(leads, searchValue);
+      dispatch(setFilteredLeads(filtered));
+   }, [leads, searchValue, dispatch]);
 
    const getTableClasses = (columnId: string) =>
       cx({
@@ -37,20 +55,31 @@ export const LeadsTable = () => {
          [styles.notSorted]: !isSorted && !isSortedDesc,
       });
 
-   const columns = useMemo(
+   const columns = useMemo<Column[]>(
       () => [
          {
             Header: 'Name',
             accessor: 'name',
             Cell: ({ value }: { value: string }) => (
-               <span className={styles.tdLeft}>{formatNameString(value)}</span>
+               <Highlighter
+                  searchWords={[searchValue]}
+                  autoEscape={true}
+                  highlightClassName={styles.highlight__values}
+                  textToHighlight={formatNameString(value)}
+               />
             ),
          },
          {
             Header: 'Email',
             accessor: 'email',
             Cell: ({ value }: { value: string }) => (
-               <span className={styles.tdLeft}>{value.toLowerCase()}</span>
+               <Highlighter
+                  searchWords={[searchValue]}
+                  autoEscape={true}
+                  highlightClassName={styles.highlight__values}
+                  textToHighlight={value.toLowerCase()}
+                  highlight={searchValue}
+               />
             ),
          },
          {
@@ -68,10 +97,10 @@ export const LeadsTable = () => {
             ),
          },
       ],
-      [],
+      [searchValue],
    );
    const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable(
-      { columns, data: leads },
+      { columns, data: filteredLeads },
       useSortBy,
    );
 
