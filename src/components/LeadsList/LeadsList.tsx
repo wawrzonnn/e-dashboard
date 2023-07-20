@@ -9,6 +9,7 @@ const cx = classNames.bind(styles);
 
 export const LeadsList = () => {
    const dispatch = useAppDispatch();
+   const user = useAppSelector((state) => state.user.data);
    const leads = filterLeadsFromLast24Hours(
       useAppSelector((state: { leads: LeadDto[] }) => state.leads),
    );
@@ -17,8 +18,10 @@ export const LeadsList = () => {
    const [isScrollVisible, setIsScrollVisible] = useState(false);
 
    useEffect(() => {
-      dispatch(loadLeads());
-   }, [dispatch]);
+      if (user?.token) {
+         dispatch(loadLeads(user.token));
+      }
+   }, [dispatch, user]);
 
    const loadMore = () => {
       setIsScrollVisible(leads.length > numDisplayed);
