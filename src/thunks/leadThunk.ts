@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { setLeads } from '../slices/leadSlice';
-import { AppThunk, AppDispatch } from '../store/configureStore';
+import { AppThunk } from '../store/configureStore';
 
 export const fetchLeads = createAsyncThunk('leads/fetch', async () => {
    const response = await fetch('https://training.nerdbord.io/api/v1/leads');

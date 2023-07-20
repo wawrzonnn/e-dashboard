@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
-import { checkToken } from '../utills/checkToken';
+import { checkToken } from '../utils/checkToken';
 
 interface DecodedToken {
    email: string;
