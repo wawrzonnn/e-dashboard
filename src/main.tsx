@@ -25,7 +25,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
             cookieDomain={window.location.hostname}
          >
             <BrowserRouter>
-               <App />
+               <div className="app_container">
+                  <App />
+               </div>
             </BrowserRouter>
          </AuthProvider>
       </Provider>
