@@ -1,8 +1,7 @@
 /* eslint-disable react/jsx-key */
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useTable, useSortBy } from 'react-table';
 import Highlighter from 'react-highlight-words';
-import classNames from 'classnames/bind';
 
 import { Table, TableHead, TableBody, TableRow } from 'nerdux-ui-system';
 
@@ -12,10 +11,9 @@ import { formatDateString, formatNameString } from '../../utils/formatLeadsTable
 import { useTableStyles } from './useTableStyles';
 import { useTableEffects } from './useTableEffects';
 import { TableArrow } from '../../assets/icons/TableArrow';
+import { Pagination } from '../Pagination/Pagination';
 
 import styles from './LeadsTable.module.scss';
-
-const cx = classNames.bind(styles);
 
 interface LeadsTableProps {
    searchValue: string;
@@ -30,6 +28,20 @@ export const LeadsTable: React.FC<LeadsTableProps> = ({ searchValue }) => {
    useTableEffects(searchValue);
    const { getTableClasses, getDynamicHeaderClasses } = useTableStyles();
    const filteredLeads = useAppSelector((state) => state.leads.filteredLeads);
+
+   const leadsPerPage = 8;
+   const maxPages = Math.ceil(filteredLeads.length / leadsPerPage);
+
+   const [activePage, setActivePage] = useState(1);
+
+   const slicedLeads = useMemo(() => {
+      const start = (activePage - 1) * leadsPerPage;
+      return filteredLeads.slice(start, start + leadsPerPage);
+   }, [filteredLeads, activePage]);
+
+   const onPageChange = (value: number) => {
+      setActivePage(value);
+   };
 
    const columns = useMemo<Column[]>(
       () => [
@@ -81,7 +93,7 @@ export const LeadsTable: React.FC<LeadsTableProps> = ({ searchValue }) => {
       [searchValue],
    );
    const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable(
-      { columns, data: filteredLeads },
+      { columns, data: slicedLeads },
       useSortBy,
    );
 
@@ -123,6 +135,7 @@ export const LeadsTable: React.FC<LeadsTableProps> = ({ searchValue }) => {
                })}
             </TableBody>
          </Table>
+         <Pagination maxPages={maxPages} currentPage={activePage} onPageChange={onPageChange} />
       </div>
    );
 };
