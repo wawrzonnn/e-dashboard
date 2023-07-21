@@ -1,27 +1,20 @@
 /* eslint-disable react/jsx-key */
 import React, { useMemo, useState } from 'react';
 import { useTable, useSortBy } from 'react-table';
-import Highlighter from 'react-highlight-words';
 
 import { Table, TableHead, TableBody, TableRow } from 'nerdux-ui-system';
 
-import { LeadDto } from 'data/dto/Lead.dto';
 import { useAppSelector } from '../../store/hooks';
-import { formatDateString, formatNameString } from '../../utils/formatLeadsTableData';
 import { useTableStyles } from './useTableStyles';
 import { useTableEffects } from './useTableEffects';
 import { TableArrow } from '../../assets/icons/TableArrow';
 import { Pagination } from '../Pagination/Pagination';
+import { getColumns } from './Columns';
 
 import styles from './LeadsTable.module.scss';
 
 interface LeadsTableProps {
    searchValue: string;
-}
-
-interface Column {
-   Header: string;
-   accessor: keyof LeadDto;
 }
 
 export const LeadsTable: React.FC<LeadsTableProps> = ({ searchValue }) => {
@@ -43,58 +36,15 @@ export const LeadsTable: React.FC<LeadsTableProps> = ({ searchValue }) => {
       setActivePage(value);
    };
 
-   const columns = useMemo<Column[]>(
-      () => [
-         {
-            Header: 'Name',
-            accessor: 'name',
-            Cell: ({ value }: { value: string }) => (
-               <Highlighter
-                  searchWords={[searchValue]}
-                  autoEscape={true}
-                  highlightClassName={styles.highlight__values}
-                  textToHighlight={formatNameString(value)}
-               />
-            ),
-            sortType: (a: { original: { name: string } }, b: { original: { name: string } }) => {
-               const aName = formatNameString(a.original.name);
-               const bName = formatNameString(b.original.name);
-               return aName.localeCompare(bName);
-            },
-         },
-         {
-            Header: 'Email',
-            accessor: 'email',
-            Cell: ({ value }: { value: string }) => (
-               <Highlighter
-                  searchWords={[searchValue]}
-                  autoEscape={true}
-                  highlightClassName={styles.highlight__values}
-                  textToHighlight={value.toLowerCase()}
-                  highlight={searchValue}
-               />
-            ),
-         },
-         {
-            Header: 'Agreed',
-            accessor: 'consentsAccepted',
-            Cell: ({ value }: { value: boolean }) => (
-               <span className={styles.tdRight}>{value ? 'Yes' : 'No'}</span>
-            ),
-         },
-         {
-            Header: 'Date',
-            accessor: 'createdAt',
-            Cell: ({ value }: { value: string }) => (
-               <span className={styles.tdRight}>{formatDateString(value)}</span>
-            ),
-         },
-      ],
-      [searchValue],
-   );
+   const columns = useMemo(() => getColumns(searchValue), [searchValue]);
    const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable(
-      { columns, data: slicedLeads },
+      { columns, data: filteredLeads },
       useSortBy,
+   );
+
+   const slicedRows = useMemo(
+      () => rows.slice((activePage - 1) * leadsPerPage, activePage * leadsPerPage),
+      [rows, activePage],
    );
 
    return (
@@ -123,7 +73,7 @@ export const LeadsTable: React.FC<LeadsTableProps> = ({ searchValue }) => {
                ))}
             </TableHead>
             <TableBody {...getTableBodyProps()}>
-               {rows.map((row) => {
+               {slicedRows.map((row) => {
                   prepareRow(row);
                   return (
                      <TableRow {...row.getRowProps()}>
@@ -135,7 +85,9 @@ export const LeadsTable: React.FC<LeadsTableProps> = ({ searchValue }) => {
                })}
             </TableBody>
          </Table>
-         <Pagination maxPages={maxPages} currentPage={activePage} onPageChange={onPageChange} />
+         {filteredLeads.length > 8 && (
+            <Pagination maxPages={maxPages} currentPage={activePage} onPageChange={onPageChange} />
+         )}
       </div>
    );
 };
