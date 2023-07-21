@@ -58,9 +58,11 @@ export const LeadsList = () => {
                )}
             </ul>
          </div>
-         <button className={styles.loadmore__button} onClick={loadMore}>
-            Load more
-         </button>
+         {isScrollVisible && (
+            <button className={styles.loadmore__button} onClick={loadMore}>
+               Load more
+            </button>
+         )}
       </>
    );
 };
