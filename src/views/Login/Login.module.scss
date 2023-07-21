@@ -5,9 +5,13 @@
    margin: 0;
    padding: 0;
 }
-
+.wrapper {
+   margin: -75px;
+   background-color: white;
+}
 .main__wrapper {
-    margin: 140px 120px 0 30px;
+    padding: 140px 120px 0 30px;
+    background-color: white;
 }
 
 .header__wrapper {
@@ -48,6 +52,10 @@
    font-weight: 500;
    font-size: 14px;
    line-height: 20px;
+   &:hover{
+      background: black;
+      box-shadow: none;
+   }
 }
 
 .wrapper {

@@ -1,3 +1,11 @@
+.wrapper {
+   padding: 0px 50px;
+   margin: 0 -45px;
+   height: 716px;
+   background-color: white;
+
+}
+
 .leadsHeader__wrapper {
    display: flex;
    justify-content: space-between;
@@ -28,6 +36,9 @@
    input {
       height: 50.5px;
       width: 200px;
+   }
+   input:focus {
+      outline: 2px solid black;
    }
 }
 

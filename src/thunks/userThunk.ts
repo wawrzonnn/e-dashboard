@@ -30,5 +30,3 @@ export const loginUser = createAsyncThunk(
       return { token: response.data.token, email: decoded.email, isTokenValid };
    },
 );
-
-export default loginUser;

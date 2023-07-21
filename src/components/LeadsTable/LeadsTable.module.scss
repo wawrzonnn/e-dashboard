@@ -6,21 +6,26 @@
    padding: 0 20px;
 }
 
-.wrapper th, .wrapper td {
+.wrapper th,
+.wrapper td {
    width: 100%;
    padding: 17px 20px;
 }
-
-.thead  {
+.wrapper tr {
+   outline: none;
+   border: 1px solid black;
+   border-top: none;
+}
+.thead {
    display: flex;
    align-items: center;
    gap: 10px;
 }
 
-.thLeft  {
+.thLeft {
    justify-content: flex-start;
 }
-.thRight  {
+.thRight {
    justify-content: flex-end;
 }
 
