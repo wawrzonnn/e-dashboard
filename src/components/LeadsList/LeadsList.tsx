@@ -40,16 +40,22 @@ export const LeadsList = () => {
          </div>
          <div className={getListClasses}>
             <ul>
-               {leads.slice(0, numDisplayed).map((lead) => (
-                  <li key={lead._id}>
-                     <p className={styles.listitem__title}>
-                        {lead.name}
-                        <span className={styles.listitem__support}>
-                           {formatDate(lead.createdAt)}
-                        </span>
-                     </p>
+               {leads.length > 0 ? (
+                  leads.slice(0, numDisplayed).map((lead) => (
+                     <li key={lead._id}>
+                        <p className={styles.listitem__title}>
+                           {lead.name}
+                           <span className={styles.listitem__support}>
+                              {formatDate(lead.createdAt)}
+                           </span>
+                        </p>
+                     </li>
+                  ))
+               ) : (
+                  <li>
+                     <span className={styles.listitem__support}>No new leads</span>
                   </li>
-               ))}
+               )}
             </ul>
          </div>
          <button className={styles.loadmore__button} onClick={loadMore}>
