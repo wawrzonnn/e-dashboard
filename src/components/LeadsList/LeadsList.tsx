@@ -58,10 +58,10 @@ export const LeadsList = () => {
                )}
             </ul>
          </div>
-         {isScrollVisible && (
-            <button className={styles.loadmore__button} onClick={loadMore}>
+         {leads.length > numDisplayed && (
+            <div className={styles.loadmore__button} onClick={loadMore}>
                Load more
-            </button>
+            </div>
          )}
       </>
    );
