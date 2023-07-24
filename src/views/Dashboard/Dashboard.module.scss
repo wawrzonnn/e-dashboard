@@ -25,3 +25,14 @@
       }
    }
 }
+.leadslist__wrapper {
+   display: flex;
+   flex-direction: column;
+}
+.leads__wrapper {
+   display: flex;
+   justify-content: center;
+   align-items: flex-start;
+   gap: 28px;
+}
+
