@@ -25,3 +25,7 @@ eDashboard is a professional lead management platform.
 - User should be able to view leads statistics in Dashboard page
 - User should be able to view table with collected leads in Leads page
 - User should be able to sort table recordsUser should be able to search through table records (name, email)
+
+
+### LIVE
+<a href=https://e-dashboard-ike8.vercel.app/?vercelToolbarCode=b2cKrIU_RiPq5QC>Click</a>
