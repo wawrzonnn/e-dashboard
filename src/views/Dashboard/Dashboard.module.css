@@ -1,0 +1,55 @@
+.wrapper {
+  padding: 30px 70px;
+  margin: 0 -45px;
+  height: 716px;
+  background-color: white;
+}
+
+.wrapper h2,
+.wrapper h3 {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 36px;
+  color: #000000;
+}
+
+.wrapper h2 {
+  font-size: 28px;
+}
+
+.wrapper h3 {
+  font-size: 22px;
+}
+
+.wrapper h3 span {
+  color: #787579;
+  font-size: 14px;
+  font-style: normal;
+  line-height: 20px;
+}
+
+.leadslist__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.leads__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  gap: 68px;
+}
+/*# sourceMappingURL=Dashboard.module.css.map */

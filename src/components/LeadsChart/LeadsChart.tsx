@@ -55,7 +55,7 @@ export const LeadsChart = () => {
                <AreaChart data={chartData} margin={{ top: 20, right: -5, bottom: 20 }}>
                   <CartesianGrid vertical={false} />
                   <XAxis
-                     dy={15}
+                     dy={25}
                      dataKey="name"
                      type="category"
                      domain={['dataMin', 'dataMax']}
@@ -64,7 +64,7 @@ export const LeadsChart = () => {
                   />
                   <YAxis
                      dx={20}
-                     domain={[0, 'dataMax']}
+                     domain={['dataMin', 'dataMax']}
                      ticks={[0, 5, 10, 15, 20]}
                      orientation="right"
                      axisLine={false}

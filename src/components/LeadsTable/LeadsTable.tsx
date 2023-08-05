@@ -85,9 +85,15 @@ export const LeadsTable: React.FC<LeadsTableProps> = ({ searchValue }) => {
                })}
             </TableBody>
          </Table>
-         {filteredLeads.length > 8 && (
-            <Pagination maxPages={maxPages} currentPage={activePage} onPageChange={onPageChange} />
-         )}
+         <div className={styles.pagination_wrapper}>
+            {filteredLeads.length > 8 && (
+               <Pagination
+                  maxPages={maxPages}
+                  currentPage={activePage}
+                  onPageChange={onPageChange}
+               />
+            )}
+         </div>
       </div>
    );
 };

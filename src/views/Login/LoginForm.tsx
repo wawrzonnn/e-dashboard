@@ -18,7 +18,7 @@ export const LoginForm = () => {
    const signIn = useSignIn();
 
    const [isLoading, setIsLoading] = useState(false);
-   const [loginError, setLoginError] = useState<string | null>(null);
+   const [loginError, setLoginError] = useState<string | undefined>(undefined);
 
    const formik = useFormik<FormValues>({
       initialValues: {
@@ -37,22 +37,23 @@ export const LoginForm = () => {
       },
       onSubmit: async (values) => {
          setIsLoading(true);
-         try {
-            const user = await dispatch(loginUser(values));
-            if (user.payload) {
-               const userPayload = user.payload as { token: string; email: string };
-               signIn({
-                  token: userPayload.token,
-                  expiresIn: 3600,
-                  tokenType: 'Bearer',
-               });
-               setIsLoading(false);
-               navigate('/dashboard');
-            }
-         } catch (error) {
-            setLoginError('Failed to log in, please try again.');
+         const action = await dispatch(loginUser(values));
+         if (loginUser.fulfilled.match(action)) {
+            const userPayload = action.payload as { token: string; email: string };
+            signIn({
+               token: userPayload.token,
+               expiresIn: 3600,
+               tokenType: 'Bearer',
+            });
             setIsLoading(false);
-            console.log('error:', error);
+            navigate('/dashboard');
+         } else {
+            if (action.error) {
+               setLoginError('Invalid email or password');
+            } else {
+               setLoginError('An unknown error occurred.');
+            }
+            setIsLoading(false);
          }
       },
    });
@@ -78,6 +79,11 @@ export const LoginForm = () => {
             value={formik.values.password}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
+            error={
+               formik.touched.password && formik.errors.password
+                  ? formik.errors.password
+                  : loginError
+            }
          />
          <div className={styles.submit__button}>
             <Button
@@ -88,7 +94,6 @@ export const LoginForm = () => {
             >
                Login
             </Button>
-            {loginError && <div className={styles.error}>{loginError}</div>}
          </div>
       </form>
    );

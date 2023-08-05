@@ -1,0 +1,113 @@
+.wrapper {
+  padding: 0px 50px;
+  margin: 0 -45px;
+  height: 716px;
+  background-color: white;
+}
+
+.leadsHeader__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 30px 20px;
+  width: 100%;
+}
+
+.leadsHeader__wrapper h2 {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 36px;
+  color: #000000;
+}
+
+.search__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 5px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.search__wrapper button {
+  color: white;
+  background-color: #000000;
+  height: 54px;
+}
+
+.search__wrapper button:hover {
+  background: #000000;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.search__wrapper input {
+  height: 50.5px;
+  width: 200px;
+}
+
+.search__wrapper input:focus {
+  outline: 2px solid black;
+}
+
+.results__wrapper {
+  padding: 0 20px;
+  margin-top: -40px;
+  margin-bottom: 20px;
+}
+
+.results__values {
+  color: var(--neutral-20, #313033);
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.results__clear {
+  color: var(--key-colors-magenta, #b23386);
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.results__clear:hover {
+  text-decoration: underline;
+}
+
+.noresults__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 40px;
+  margin-top: 30px;
+}
+
+.noresults__wrapper p {
+  color: #000;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+/*# sourceMappingURL=Leads.module.css.map */
