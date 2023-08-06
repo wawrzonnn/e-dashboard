@@ -25,45 +25,43 @@ export const Leads = () => {
    };
 
    return (
-      <>
-         <div className={styles.wrapper}>
-            <div className={styles.leadsHeader__wrapper}>
-               <h2>Collected Leads</h2>
-               <div className={styles.search__wrapper}>
-                  <TextField
-                     value={searchInputValue}
-                     withIcon
-                     placeholder={'Search'}
-                     name={'search'}
-                     id={'search'}
-                     onChange={handleInputChange}
-                     onClear={handleClearClick}
-                  ></TextField>
-                  <Button onClick={handleSearchClick} variant={'primary'}>
-                     Search
-                  </Button>
-               </div>
+      <div className={styles.wrapper}>
+         <div className={styles.leadsHeader__wrapper}>
+            <h2>Collected Leads</h2>
+            <div className={styles.search__wrapper}>
+               <TextField
+                  value={searchInputValue}
+                  withIcon
+                  placeholder={'Search'}
+                  name={'search'}
+                  id={'search'}
+                  onChange={handleInputChange}
+                  onClear={handleClearClick}
+               ></TextField>
+               <Button onClick={handleSearchClick} variant={'primary'}>
+                  Search
+               </Button>
             </div>
-            {searchValue && (
-               <div className={styles.results__wrapper}>
-                  <p className={styles.results__values}>
-                     Displaying search results for "{searchValue}" ({filteredLeads.length})
-                     <span className={styles.results__clear} onClick={handleClearClick}>
-                        Clear search
-                     </span>
-                  </p>
-               </div>
-            )}
-            <LeadsTable searchValue={searchValue} />
-            {!filteredLeads.length && (
-               <div className={styles.noresults__wrapper}>
-                  <p>No results for "{searchValue}"</p>
+         </div>
+         {searchValue && (
+            <div className={styles.results__wrapper}>
+               <p className={styles.results__values}>
+                  Displaying search results for "{searchValue}" ({filteredLeads.length})
                   <span className={styles.results__clear} onClick={handleClearClick}>
                      Clear search
                   </span>
-               </div>
-            )}
-         </div>
-      </>
+               </p>
+            </div>
+         )}
+         <LeadsTable searchValue={searchValue} />
+         {!filteredLeads.length && (
+            <div className={styles.noresults__wrapper}>
+               <p>No results for "{searchValue}"</p>
+               <span className={styles.results__clear} onClick={handleClearClick}>
+                  Clear search
+               </span>
+            </div>
+         )}
+      </div>
    );
 };
