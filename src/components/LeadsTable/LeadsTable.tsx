@@ -49,42 +49,44 @@ export const LeadsTable: React.FC<LeadsTableProps> = ({ searchValue }) => {
 
    return (
       <div className={styles.wrapper}>
-         <Table {...getTableProps()}>
-            <TableHead>
-               {headerGroups.map((headerGroup) => (
-                  <TableRow {...headerGroup.getHeaderGroupProps()}>
-                     {headerGroup.headers.map((column) => (
-                        <th
-                           {...column.getHeaderProps(column.getSortByToggleProps())}
-                           className={getTableClasses(column.id)}
-                        >
-                           {column.render('Header')}
-                           <span
-                              className={getDynamicHeaderClasses(
-                                 column.isSorted,
-                                 column.isSortedDesc || false,
-                              )}
+         <div className={styles.flex_container}>
+            <Table {...getTableProps()}>
+               <TableHead>
+                  {headerGroups.map((headerGroup) => (
+                     <TableRow {...headerGroup.getHeaderGroupProps()}>
+                        {headerGroup.headers.map((column) => (
+                           <th
+                              {...column.getHeaderProps(column.getSortByToggleProps())}
+                              className={getTableClasses(column.id)}
                            >
-                              <TableArrow />
-                           </span>
-                        </th>
-                     ))}
-                  </TableRow>
-               ))}
-            </TableHead>
-            <TableBody {...getTableBodyProps()}>
-               {slicedRows.map((row) => {
-                  prepareRow(row);
-                  return (
-                     <TableRow {...row.getRowProps()}>
-                        {row.cells.map((cell, idx) => (
-                           <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                              {column.render('Header')}
+                              <span
+                                 className={getDynamicHeaderClasses(
+                                    column.isSorted,
+                                    column.isSortedDesc || false,
+                                 )}
+                              >
+                                 <TableArrow />
+                              </span>
+                           </th>
                         ))}
                      </TableRow>
-                  );
-               })}
-            </TableBody>
-         </Table>
+                  ))}
+               </TableHead>
+               <TableBody {...getTableBodyProps()}>
+                  {slicedRows.map((row) => {
+                     prepareRow(row);
+                     return (
+                        <TableRow {...row.getRowProps()}>
+                           {row.cells.map((cell, idx) => (
+                              <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                           ))}
+                        </TableRow>
+                     );
+                  })}
+               </TableBody>
+            </Table>
+         </div>
          <div className={styles.pagination_wrapper}>
             {filteredLeads.length > 8 && (
                <Pagination

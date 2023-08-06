@@ -1,4 +1,5 @@
 .wrapper table {
+  position: relative;
   font-family: 'Inter';
   font-weight: 500;
   width: 100%;
