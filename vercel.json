@@ -1,12 +1,17 @@
 {
     "routes": [
       {
-        "src": "/(.*).js(on)?",
+        "src": "/_assets/(.*)",
         "headers": { "cache-control": "s-maxage=31536000,immutable" },
-        "continue": true
+        "dest": "/_assets/$1"
       },
       {
-        "src": "/.*",
+        "src": "/src/(.*)",
+        "headers": { "cache-control": "s-maxage=31536000,immutable" },
+        "dest": "/src/$1"
+      },
+      {
+        "src": "/(.*)",
         "dest": "/index.html"
       }
     ]
