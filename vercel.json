@@ -1,0 +1,13 @@
+{
+    "routes": [
+      {
+        "src": "/(.*).js(on)?",
+        "headers": { "cache-control": "s-maxage=31536000,immutable" },
+        "continue": true
+      },
+      {
+        "src": "/.*",
+        "dest": "/index.html"
+      }
+    ]
+  }
