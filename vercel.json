@@ -1,18 +1,12 @@
 {
-    "routes": [
+    "rewrites": [
       {
-        "src": "/_assets/(.*)",
-        "headers": { "cache-control": "s-maxage=31536000,immutable" },
-        "dest": "/_assets/$1"
+        "source": "/(.*).js(on)?",
+        "destination": "/src/$1.js"
       },
       {
-        "src": "/src/(.*)",
-        "headers": { "cache-control": "s-maxage=31536000,immutable" },
-        "dest": "/src/$1"
-      },
-      {
-        "src": "/(.*)",
-        "dest": "/index.html"
+        "source": "/(.*)",
+        "destination": "/index.html"
       }
     ]
   }
