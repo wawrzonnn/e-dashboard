@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import { checkToken } from '../utils/checkToken';
+import Cookies from 'js-cookie';
 
 interface DecodedToken {
    email: string;
@@ -25,6 +26,7 @@ export const loginUser = createAsyncThunk(
             },
          },
       );
+      Cookies.set('token', response.data.token, { expires: 7 });
       const decoded = decodeToken(response.data.token);
       const isTokenValid = await checkToken(response.data.token);
       return { token: response.data.token, email: decoded.email, isTokenValid };

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import styles from './Login.module.scss';
 import { useFormik } from 'formik';
 import { TextField, Button } from 'nerdux-ui-system';
 import { useNavigate } from 'react-router-dom';
 import { useSignIn } from 'react-auth-kit';
 import { useAppDispatch } from '../../store/hooks';
 import { loginUser } from '../../thunks/userThunk';
-import styles from './Login.module.scss';
+import Cookies from 'js-cookie';
 
 interface FormValues {
    email: string;
@@ -41,7 +42,7 @@ export const LoginForm = () => {
          if (loginUser.fulfilled.match(action)) {
             const userPayload = action.payload as { token: string; email: string };
             signIn({
-               token: userPayload.token,
+               token: Cookies.get('token') || '',
                expiresIn: 3600,
                tokenType: 'Bearer',
             });
