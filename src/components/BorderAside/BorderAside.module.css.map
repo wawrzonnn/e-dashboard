@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,MAAM,CAAC;EACH,OAAO,EAAE,GAAG;EACZ,MAAM,EAAE,IAAI;CACf",
-    "sources": [
-        "BorderAside.module.scss"
-    ],
-    "names": [],
-    "file": "BorderAside.module.css"
-}

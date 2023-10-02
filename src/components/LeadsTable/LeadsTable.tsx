@@ -17,17 +17,18 @@ interface LeadsTableProps {
    searchValue: string;
 }
 
-export const LeadsTable: React.FC<LeadsTableProps> = ({ searchValue }) => {
+export const LeadsTable = ({ searchValue }: LeadsTableProps) => {
    useTableEffects(searchValue);
    const { getTableClasses, getDynamicHeaderClasses } = useTableStyles();
    const filteredLeads = useAppSelector((state) => state.leads.filteredLeads);
 
    const leadsPerPage = 8;
-   const maxPages = Math.ceil(filteredLeads.length / leadsPerPage);
+   const maxPages = Math.ceil((filteredLeads?.length || 0) / leadsPerPage);
 
    const [activePage, setActivePage] = useState(1);
 
    const slicedLeads = useMemo(() => {
+      if (!filteredLeads) return [];
       const start = (activePage - 1) * leadsPerPage;
       return filteredLeads.slice(start, start + leadsPerPage);
    }, [filteredLeads, activePage]);
@@ -38,7 +39,7 @@ export const LeadsTable: React.FC<LeadsTableProps> = ({ searchValue }) => {
 
    const columns = useMemo(() => getColumns(searchValue), [searchValue]);
    const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable(
-      { columns, data: filteredLeads },
+      { columns, data: filteredLeads || [] },
       useSortBy,
    );
 
@@ -88,7 +89,7 @@ export const LeadsTable: React.FC<LeadsTableProps> = ({ searchValue }) => {
             </Table>
          </div>
          <div className={styles.pagination_wrapper}>
-            {filteredLeads.length > 8 && (
+            {filteredLeads?.length > 8 && (
                <Pagination
                   maxPages={maxPages}
                   currentPage={activePage}

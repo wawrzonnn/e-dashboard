@@ -6,8 +6,12 @@ interface ChartData {
    leads: number;
 }
 
-export const getChartData = (dateStart: moment.Moment, leads: LeadDto[]): ChartData[] => {
+export const getChartData = (dateStart: moment.Moment, leads?: LeadDto[]): ChartData[] => {
    const data: ChartData[] = [];
+
+   if (!leads) {
+      return data;
+   }
 
    for (let i = 0; i < 9; i++) {
       const currentDate = moment(dateStart).add(i, 'days');

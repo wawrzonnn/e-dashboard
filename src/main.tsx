@@ -4,17 +4,13 @@ import App from './App';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { configureStore } from '@reduxjs/toolkit';
-import leadsReducer from '../src/slices/leadSlice';
-import userReducer from '../src/slices/userSlice';
 import { AuthProvider } from 'react-auth-kit';
+import store from './store/configureStore';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistStore } from 'redux-persist';
 
-const store = configureStore({
-   reducer: {
-      leads: leadsReducer,
-      user: userReducer,
-   },
-});
+let persistor = persistStore(store);
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
    <React.StrictMode>
       <Provider store={store}>
@@ -25,9 +21,11 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
             cookieDomain={window.location.hostname}
          >
             <BrowserRouter>
-               <div className="app_container">
-                  <App />
-               </div>
+               <PersistGate loading={null} persistor={persistor}>
+                  <div className="app_container">
+                     <App />
+                  </div>
+               </PersistGate>
             </BrowserRouter>
          </AuthProvider>
       </Provider>

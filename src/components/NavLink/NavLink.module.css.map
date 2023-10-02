@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,QAAQ,CAAC;EACN,eAAe,EAAE,IAAI;EACrB,OAAO,EAAE,MAAM;EACf,MAAM,EAAE,MAAM;EACd,WAAW,EAAE,OAAO;EACpB,UAAU,EAAE,MAAM;EAClB,WAAW,EAAE,GAAG;EAChB,SAAS,EAAE,IAAI;EACf,WAAW,EAAE,IAAI;EACjB,KAAK,EAAE,OAAO;CAChB;;AAED,AAAA,OAAO,CAAC;EACL,KAAK,EAAE,OAAO;EACd,aAAa,EAAE,iBAAiB;CAClC",
-    "sources": [
-        "NavLink.module.scss"
-    ],
-    "names": [],
-    "file": "NavLink.module.css"
-}

@@ -2,6 +2,7 @@ import { LeadDto } from '../data/dto/Lead.dto';
 
 // Filters leads from the last 24 hours.
 export const filterLeadsFromLast24Hours = (leads: LeadDto[]) => {
+   if (!leads) return [];
    return leads.filter(
       (lead) => new Date().getTime() - new Date(lead.createdAt).getTime() < 24 * 60 * 60 * 1000,
    );
