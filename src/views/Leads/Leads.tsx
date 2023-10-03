@@ -54,7 +54,7 @@ export const Leads = () => {
             </div>
          )}
          <LeadsTable searchValue={searchValue} />
-         {!filteredLeads.length && (
+         {!filteredLeads?.length && (
             <div className={styles.noresults__wrapper}>
                <p>No results for "{searchValue}"</p>
                <span className={styles.results__clear} onClick={handleClearClick}>
