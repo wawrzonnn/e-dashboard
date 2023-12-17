@@ -3,12 +3,16 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
-  font-weight: 400;
-  
+  font-weight: 400; 
+  background-color: #0f1217;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .app_container{
-  height: 100vh;
+  height: 100%;
   width: 100%;
   margin: 0 auto ;
   display: flex;

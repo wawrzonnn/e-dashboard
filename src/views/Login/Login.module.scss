@@ -10,8 +10,8 @@
    background-color: white;
 }
 .main__wrapper {
-    padding: 140px 120px 0 30px;
-    background-color: white;
+   padding: 140px 120px 0 30px;
+   background-color: white;
 }
 
 .header__wrapper {
@@ -43,16 +43,18 @@
 }
 
 .submit__button button {
-    margin-top: 15px;
+   margin-top: 15px;
    width: 456px;
    height: 56px;
    color: white;
    background: black;
    border: 1px solid #000000;
+   outline: none;
    font-weight: 500;
    font-size: 14px;
    line-height: 20px;
-   &:hover{
+   cursor: pointer;
+   &:hover {
       background: black;
       box-shadow: none;
    }
@@ -66,8 +68,35 @@
 .error {
    font-family: 'Inter';
    font-weight: 500;
-   color: #B3375F;
+   color: #b3375f;
    font-size: 14px;
    margin-top: 5px;
    margin-left: 15px;
+}
+
+.dev__info_wrapper {
+   display: flex;
+   flex-direction: column;
+   span {
+      font-size: 12px;
+      color: #0f1217;
+      font-weight: 500;
+   }
+}
+
+.mobile__message {
+   display: none;
+   text-align: center;
+   font-size: 14px;
+   color: #333;
+   padding: 10px;
+   background-color: #f8f8f8;
+   border: 1px solid #ddd;
+   margin: 20px 0;
+}
+
+@media screen and (max-width: 768px) {
+   .mobile__message {
+       display: block;
+   }
 }
