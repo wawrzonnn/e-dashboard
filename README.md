@@ -77,10 +77,26 @@ Password: catsanddogs
 
 ## Screenshots
 
-[![Thumbnail](./docs/loginSmall.png)](./docs/loginbig.png)
-[![Thumbnail](./docs/leadsSmall.png)](./docs//leadsBig.png)
-[![Thumbnail](./docs/dashboardSmall.png)](./docs/dashboardBig.png)
+#### Login Screen
+<p align="center">
+  <a href="./docs/loginbig.png">
+    <img src="./docs/loginSmall.png" alt="Login Screen Thumbnail"/>
+  </a>
+</p>
 
+#### Leads Screen
+<p align="center">
+  <a href="./docs//leadsBig.png">
+    <img src="./docs/leadsSmall.png" alt="Leads Screen Thumbnail"/>
+  </a>
+</p>
+
+#### Dashboard Screen
+<p align="center">
+  <a href="./docs/dashboardBig.png">
+    <img src="./docs/dashboardSmall.png" alt="Dashboard Screen Thumbnail"/>
+  </a>
+</p>
 
 ## Credits
 
