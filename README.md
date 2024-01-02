@@ -1,6 +1,12 @@
 <h1 align="center">
   eDashboard
 </h1>
+<p align="center">
+    <img src="./docs/dashboardLogo.png" alt="Dashboard Logo"/>
+</p>
+
+
+
 
 
 ## Introduction
@@ -63,16 +69,6 @@ The application will be running on **http://localhost:5173.**
 ## Live Demo
 
 Experience eDashboard in action: [Live Demo Link](https://e-dashboard-psi.vercel.app/)
-
-
-## Login Details
-
-To explore the full features of eDashboard, use the following credentials:
-
-```bash
-Login: dev@nerdbord.io
-Password: catsanddogs
-```
 
 
 ## Screenshots
