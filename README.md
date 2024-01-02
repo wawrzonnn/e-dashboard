@@ -78,6 +78,8 @@ Password: catsanddogs
 ## Screenshots
 
 [![Thumbnail](./docs/loginSmall.png)](./docs/loginbig.png)
+[![Thumbnail](./docs/leadsSmall.png)](./docs//leadsBig.png)
+[![Thumbnail](./docs/dashboardSmall.png)](./docs/dashboardBig.png)
 
 
 ## Credits
