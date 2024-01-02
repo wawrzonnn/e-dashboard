@@ -15,10 +15,12 @@
 </p>
 
 <br><br><br>
+
 ## Introduction
 
 eDashboard is an advanced, functional dashboard built using React.js, TypeScript, Redux Toolkit (RTK), and Redux for efficient state management. It's designed to offer robust integration with modern technologies while providing an intuitive and user-friendly interface.
-<br>
+<br><br>
+
 ## Features
 
 **· React Table:** Flexible data display and management.
@@ -28,7 +30,8 @@ eDashboard is an advanced, functional dashboard built using React.js, TypeScript
 **· Redux State Management** Efficient and scalable state management with Redux and RTK.
 
 **· Authentication:** Secure user authentication using RTK.
-<br>
+<br><br>
+
 ## Technologies
 
 **·React.js**
@@ -46,7 +49,8 @@ eDashboard is an advanced, functional dashboard built using React.js, TypeScript
 **·Axios**
 
 **·Formik**
-<br>
+<br><br>
+
 ## Getting Started
 
 **1. Clone the Repository**
@@ -68,11 +72,13 @@ npm run dev
 ```
 
 The application will be running on **http://localhost:5173.**
-<br>
+<br><br>
+
 ## Live Demo
 
 Experience eDashboard in action: [Live Demo Link](https://e-dashboard-psi.vercel.app/)
-<br>
+<br><br>
+
 ## Screenshots
 
 #### ◇ Login
@@ -98,7 +104,8 @@ Experience eDashboard in action: [Live Demo Link](https://e-dashboard-psi.vercel
     <img src="./docs/dashboardSmall.png" alt="Dashboard Screen Thumbnail"/>
   </a>
 </p>
-<br>
+<br><br>
+
 ## Credits
 
 Design provided by [Nerdbord.io](https://nerdbord.io).
