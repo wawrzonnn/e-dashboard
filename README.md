@@ -3,34 +3,44 @@
 </h1>
 
 
-#### Introduction
+## Introduction
 
 eDashboard is an advanced, functional dashboard built using React.js, TypeScript, Redux Toolkit (RTK), and Redux for efficient state management. It's designed to offer robust integration with modern technologies while providing an intuitive and user-friendly interface.
 
----
 
 
-#### Features
+## Features
 
 **· React Table:** Flexible data display and management.
+
 **· Charts (Chart.js and Recharts):** Dynamic data visualization with responsive charts.
+
 **· Redux State Management** Efficient and scalable state management with Redux and RTK.
+
 **· Authentication:** Secure user authentication using RTK.
 
 
-#### Technologies
+## Technologies
 
 **·React.js**
+
 **·TypeScript**
+
 **·Redux Toolkit (RTK) and Redux**
+
 **·React Router**
+
 **·Sass**
+
 **·Recharts**
+
 **·Axios**
+
 **·Formik**
 
 
-#### Getting Started
+
+## Getting Started
 
 **1. Clone the Repository**
 ```bash
@@ -50,12 +60,12 @@ npm run dev
 The application will be running on **http://localhost:3000.**
 
 
-#### Live Demo
+## Live Demo
 
 Experience eDashboard in action: [Live Demo Link](https://e-dashboard-psi.vercel.app/)
 
 
-#### Login Details
+## Login Details
 
 To explore the full features of eDashboard, use the following credentials:
 
