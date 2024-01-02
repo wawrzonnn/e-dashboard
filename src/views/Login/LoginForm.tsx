@@ -23,8 +23,8 @@ export const LoginForm = () => {
 
    const formik = useFormik<FormValues>({
       initialValues: {
-         email: '',
-         password: '',
+         email: 'dev@nerdbord.io',
+         password: 'catsanddogs',
       },
       validate: (values) => {
          const errors: Partial<FormValues> = {};
