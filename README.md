@@ -57,7 +57,7 @@ npm install
 npm run dev
 ```
 
-The application will be running on **http://localhost:3000.**
+The application will be running on **http://localhost:5173.**
 
 
 ## Live Demo
@@ -74,3 +74,12 @@ Login: dev@nerdbord.io
 Password: catsanddogs
 ```
 
+
+## Screenshots
+
+[![Thumbnail](./docs/loginSmall.png)](./docs/loginbig.png)
+
+
+## Credits
+
+Design provided by [Nerdbord.io](https://nerdbord.io).

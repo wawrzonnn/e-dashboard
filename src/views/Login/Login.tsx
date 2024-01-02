@@ -12,10 +12,6 @@ export const Login = () => {
             <BorderAside src={borderLeftImage} alt={'Border left'} />
          </aside>
          <main className={styles.main__wrapper}>
-            <div className={styles.dev__info_wrapper}>
-               <span>login: dev@nerdbord.io</span>
-               <span>password: catsanddogs</span>
-            </div>
             <header className={styles.header__wrapper}>
                <h1>Welcome back</h1>
                <span>Login to continue.</span>
